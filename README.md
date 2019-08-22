@@ -149,5 +149,33 @@ H.coordToEdges(origin)();
 //]
 ```
 
+### `H.coordsToEdges(coords)()`
+#### `Coord[] → * → Edges[]`
+
+Creates a function that returns the edges of a source group of hexagons
+##### Parameters
+
+- `coords (Coord[])`: The array of cube coordinate of a source group of hexagon.
+
+##### Returns
+- `(Edge[])`: Returns an array of cube coordinates pairs for edges of the source hexagon.
+
+##### Examples
+
+```js
+const origin = [0, 0, 0];
+
+H.coordToEdges(origin)();
+// => [
+//  [.5, 0, -.5],
+//  [-.5, 0, .5], ????
+//  [0, 1, -1],
+//  [0, -1, 1],
+//  [1, -1, 0],
+//  [-1, 1, 0]
+//]
+```
+
+
 
 
