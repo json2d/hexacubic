@@ -1,0 +1,36 @@
+{
+  "name": "hexda",
+  "version": "0.1.0-alpha.1",
+  "description": "A functional Javacript utility library for working with hexagon grids",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "pretty": "prettier-eslint --write **/*.{js,json}",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/json2d/hexda.git"
+  },
+  "keywords": [
+    "hex",
+    "hexagon",
+    "grids",
+    "functional",
+    "declarative",
+    "composable",
+    "immutable",
+    "lambda",
+    "pure"
+  ],
+  "author": "Jason Yung",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.2.1",
+    "eslint-plugin-jest": "^22.15.2",
+    "jest": "^24.9.0",
+    "prettier-eslint-cli": "^5.0.0"
+  }
+}

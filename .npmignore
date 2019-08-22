@@ -1,0 +1,8 @@
+# all the crap that's not neccessary for the npm module to work
+test
+.eslintignore
+.eslintrc.json
+.gitignore
+.npmignore
+.travis.yml
+yarn.lock
