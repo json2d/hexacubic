@@ -35,7 +35,7 @@ import H from 'hexda'
 
 # API
 
-### `H.neighborsOf(coord)()`
+### `H.neighborsOf(coord)([grid])`
 #### `Tuple → * → [Tuple]`
 
 Creates a function that returns an array of cube coordinates that are neighbors to `coord`.
@@ -43,7 +43,7 @@ Creates a function that returns an array of cube coordinates that are neighbors 
 ##### Parameters
 
 - `coord (Tuple)`: The source cube coordinate.
-
+- `[grid] (Hexagon[])`: the target sparse finite grid of hexagons, default is an infinite grid of hexagons
 ##### Returns
 - `([Tuple])`: Returns an array of cube coordinates for neighbors.
 
