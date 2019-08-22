@@ -94,3 +94,32 @@ const selma = patty;
 H.isNeighborOf(patty)(selma);
 // => false
 ```
+
+### `H.coordToCorners(coord)()`
+#### `Coord → * → Coord[]`
+
+Creates a function that returns the corners of a source hexagon
+##### Parameters
+
+- `coord (Coord)`: The cube coordinate of source hexagon.
+
+##### Returns
+- `(Coord[])`: Returns an array of cube coordinates for corner points of the source hexagon.
+
+##### Examples
+
+```js
+const origin = [0, 0, 0];
+
+H.coordToCorners(origin)();
+// => [
+//  [.5, 0, -.5],
+//  [-.5, 0, .5], ????
+//  [0, 1, -1],
+//  [0, -1, 1],
+//  [1, -1, 0],
+//  [-1, 1, 0]
+//]
+```
+
+
