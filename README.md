@@ -84,4 +84,13 @@ const flanders = [1, 0, -1];
 
 H.isNeighborOf(homer)(flanders);
 // => true
+
+const patty = [10, -5, -5];
+
+H.isNeighborOf(homer)(patty);
+// => false
+
+const selma = patty;
+H.isNeighborOf(patty)(selma);
+// => false
 ```
