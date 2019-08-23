@@ -35,14 +35,14 @@ import H from 'hexda'
 
 # API
 
-### `H.neighborsOf(coord)([grid])`
+### `H.neighborsOf(center)([grid])`
 #### `Coord → * → [Coord]`
 
 Creates a function that returns an array of cube coordinates that are neighbors to `coord`.
 
 ##### Parameters
 
-- `coord (Coord)`: The source cube coordinate.
+- `center (Coord)`: The source cube coordinate.
 - `[grid] (Hexagon[])`: the target sparse finite grid of hexagons, default is an infinite grid of hexagons
 ##### Returns
 - `([Coord])`: Returns an array of cube coordinates for neighbors.
@@ -64,15 +64,15 @@ H.neighborsOf(origin)();
 //]
 ```
 
-### `H.isNeighborOf(coordA)(coordB)`
+### `H.isNeighborOf(centerA)(centerB)`
 #### `Coord → Coord → Boolean`
 
-Creates a predicate function that evaluates if `coordB` is a neighbor of `coordA`.
+Creates a predicate function that evaluates if `centerB` is a neighbor of `centerA`.
 
 ##### Parameters
 
-- `coordA (Coord)`: The source cube coordinate.
-- `coordB (Coord)`: The target cube coordinate.
+- `centerA (Coord)`: The source cube coordinate.
+- `centerB (Coord)`: The target cube coordinate.
 
 ##### Returns
 - `(Boolean)`: Returns `true` if neighbors, else `false`.
@@ -96,7 +96,7 @@ H.isNeighborOf(patty)(selma);
 // => false
 ```
 
-### `H.centerToCorners(center)()`
+### `H.cornersOf(center)()`
 #### `Coord → * → Coord[]`
 
 Creates a function that returns the corners of a source hexagon
@@ -112,7 +112,7 @@ Creates a function that returns the corners of a source hexagon
 ```js
 const origin = [0, 0, 0];
 
-H.centerToCorners(origin)();
+H.cornersOf(origin)();
 // => 
 //[ 
 //   [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ],
@@ -124,7 +124,7 @@ H.centerToCorners(origin)();
 // ]
 ```
 
-### `H.centerToEdges(center)()`
+### `H.edgesOf(center)()`
 #### `Coord → * → Edges[]`
 
 Creates a function that returns the edges of a source hexagon
@@ -140,7 +140,7 @@ Creates a function that returns the edges of a source hexagon
 ```js
 const origin = [0, 0, 0];
 
-H.centerToEdges(origin)();
+H.edgesOf(origin)();
 // => 
 // [ 
 //   [ 
