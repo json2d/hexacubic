@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "lodash.flatmap": "^4.5.0",
-    "lodash.isequal": "^4.5.0"
+    "lodash.isequal": "^4.5.0",
+    "lodash.reverse": "^4.0.1"
   }
 }
