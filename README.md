@@ -124,7 +124,7 @@ H.cornersOf(origin)();
 // ]
 ```
 
-### `H.edgesOf(center)()`
+### `H.edgesOf(center)()` [aliases: `H.boundaryOf`]
 #### `Coord → * → Edges[]`
 
 Creates a function that returns the edges of a source hexagon
@@ -173,25 +173,25 @@ H.edgesOf(origin)();
 ### `H.edgesOfEvery(centers)()`
 #### `Coord[] → * → Edges[]`
 
-Creates a function that returns the edges of a source hexagon
+Creates a function that returns the edges of every source hexagon specified.
 ##### Parameters
 
 - `centers (Coord[])`: The array of cube coordinate of the center point of every source hexagon.
 
 ##### Returns
-- `(Edge[])`: Returns an array of corner point pairs representing the edges of every the source hexagon.
+- `(Edge[])`: Returns an array of corner point pairs representing the edges of every source hexagon.
 
 ##### Examples
 
 ```js
 const origin = [0, 0, 0];
 
-const originPlus = [
+const originAndNeighbors = [
     origin,
     ...H.neighborsOf(origin)()
 ]
 
-H.edgesOfEvery(originPlus)();
+H.edgesOfEvery(originAndNeighbors)();
 // => 
 // [ 
 //   [ 
@@ -218,11 +218,49 @@ H.edgesOfEvery(originPlus)();
 //     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ],
 //     [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ] 
 //   ]
-//   ... 36 more edges, 6 for each neighbor of origin
+//   ... 36 more edges (6 edges for each neighbor of origin)
 // ]
 ```
 
-```
-const edges = H.edgesOfEvery(originPlus)();
+Because neighbor hexagons share edges, it may be desireable to dedupe:
+
+```js
+const edges = H.edgesOfEvery(originAndNeighbors)();
 const distinctEdges = _.distinct(edges)
 ```
+
+You can also use the `distinct` option:
+```js
+const edges = H.edgesOfEvery(originAndNeighbors)({distinct: true});
+```
+
+
+### `H.boundaryOfEvery(centers)()`
+#### `Coord[] → * → Edges[]`
+
+Creates a function that returns the edges of the boundary of every source hexagon specified.
+##### Parameters
+
+- `centers (Coord[])`: The array of cube coordinate of the center point of every source hexagon.
+
+##### Returns
+- `(Edge[])`: Returns an array of corner point pairs representing the edges of the boundary of every source hexagon.
+
+##### Examples
+
+```js
+const origin = [0, 0, 0];
+
+const originAndNeighbors = [
+    origin,
+    ...H.neighborsOf(origin)()
+]
+
+H.boundaryOfEvery(originAndNeighbors)();
+// => 
+// [ 
+//   ... 18 edges total (3 edges on boundary for each neighbor of origin)
+// ]
+```
+
+
