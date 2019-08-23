@@ -54,12 +54,15 @@ describe("cornersOf()", () => {
 describe("edgesOf()", () => {
   test("basic usage", () => {
     const edgesOfOrigin = H.edgesOf(origin)();
+    const cornersOfOrigin = H.cornersOf(origin)();
 
     expect(edgesOfOrigin.length).toEqual(6);
 
     edgesOfOrigin.forEach(edge => {
       const [cornerA, cornerB] = edge;
-      expect(cornerA).not.toEqual(cornerB);    
+      expect(cornerA).not.toEqual(cornerB);
+      expect(cornersOfOrigin).toContainEqual(cornerA);
+      expect(cornersOfOrigin).toContainEqual(cornerB);
     });
 
     // expect(edgesOfOrigin.every(H.isEdge)).toBeTruthy();
