@@ -170,6 +170,59 @@ H.edgesOf(origin)();
 // ]
 ```
 
+### `H.edgesOfEvery(centers)()`
+#### `Coord[] → * → Edges[]`
 
+Creates a function that returns the edges of a source hexagon
+##### Parameters
 
+- `centers (Coord[])`: The array of cube coordinate of the center point of every source hexagon.
 
+##### Returns
+- `(Edge[])`: Returns an array of corner point pairs representing the edges of every the source hexagon.
+
+##### Examples
+
+```js
+const origin = [0, 0, 0];
+
+const originPlus = [
+    origin,
+    ...H.neighborsOf(origin)()
+]
+
+H.edgesOfEvery(originPlus)();
+// => 
+// [ 
+//   [ 
+//     [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ],
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ] 
+//   ],
+//   [ 
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ],
+//     [ -0.6666666666666666, 0.3333333333333333, 0.3333333333333333 ] 
+//   ],
+//   [ 
+//     [ -0.6666666666666666, 0.3333333333333333, 0.3333333333333333 ],
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ] 
+//   ],
+//   [ 
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ],
+//     [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ] 
+//   ],
+//   [ 
+//     [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ],
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ] 
+//   ],
+//   [ 
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ],
+//     [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ] 
+//   ]
+//   ... 36 more edges, 6 for each neighbor of origin
+// ]
+```
+
+```
+const edges = H.edgesOfEvery(originPlus)();
+const distinctEdges = _.distinct(edges)
+```
