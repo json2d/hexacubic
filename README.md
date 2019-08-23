@@ -36,16 +36,16 @@ import H from 'hexda'
 # API
 
 ### `H.neighborsOf(coord)([grid])`
-#### `Tuple → * → [Tuple]`
+#### `Coord → * → [Coord]`
 
 Creates a function that returns an array of cube coordinates that are neighbors to `coord`.
 
 ##### Parameters
 
-- `coord (Tuple)`: The source cube coordinate.
+- `coord (Coord)`: The source cube coordinate.
 - `[grid] (Hexagon[])`: the target sparse finite grid of hexagons, default is an infinite grid of hexagons
 ##### Returns
-- `([Tuple])`: Returns an array of cube coordinates for neighbors.
+- `([Coord])`: Returns an array of cube coordinates for neighbors.
 
 ##### Examples
 
@@ -53,7 +53,8 @@ Creates a function that returns an array of cube coordinates that are neighbors 
 const origin = [0, 0, 0];
 
 H.neighborsOf(origin)();
-// => [
+// => 
+// [
 //  [1, 0, -1],
 //  [-1, 0, 1],
 //  [0, 1, -1],
@@ -64,14 +65,14 @@ H.neighborsOf(origin)();
 ```
 
 ### `H.isNeighborOf(coordA)(coordB)`
-#### `Tuple → Tuple → Boolean`
+#### `Coord → Coord → Boolean`
 
 Creates a predicate function that evaluates if `coordB` is a neighbor of `coordA`.
 
 ##### Parameters
 
-- `coordA (Tuple)`: The source cube coordinate.
-- `coordB (Tuple)`: The target cube coordinate.
+- `coordA (Coord)`: The source cube coordinate.
+- `coordB (Coord)`: The target cube coordinate.
 
 ##### Returns
 - `(Boolean)`: Returns `true` if neighbors, else `false`.
@@ -95,85 +96,78 @@ H.isNeighborOf(patty)(selma);
 // => false
 ```
 
-### `H.coordToCorners(coord)()`
+### `H.centerToCorners(center)()`
 #### `Coord → * → Coord[]`
 
 Creates a function that returns the corners of a source hexagon
 ##### Parameters
 
-- `coord (Coord)`: The cube coordinate of source hexagon.
+- `center (Coord)`: The cube coordinate of the center point of the source hexagon.
 
 ##### Returns
-- `(Coord[])`: Returns an array of cube coordinates for corner points of the source hexagon.
+- `(Coord[])`: Returns an array of cube coordinates of corner points of the source hexagon.
 
 ##### Examples
 
 ```js
 const origin = [0, 0, 0];
 
-H.coordToCorners(origin)();
-// => [
-//  [.5, 0, -.5],
-//  [-.5, 0, .5], ????
-//  [0, 1, -1],
-//  [0, -1, 1],
-//  [1, -1, 0],
-//  [-1, 1, 0]
-//]
+H.centerToCorners(origin)();
+// => 
+//[ 
+//   [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ],
+//   [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ],
+//   [ -0.6666666666666666, 0.3333333333333333, 0.3333333333333333 ],
+//   [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ],
+//   [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ],
+//   [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ] 
+// ]
 ```
 
-### `H.coordToEdges(coord)()`
+### `H.centerToEdges(center)()`
 #### `Coord → * → Edges[]`
 
 Creates a function that returns the edges of a source hexagon
 ##### Parameters
 
-- `coord (Coord)`: The cube coordinate of source hexagon.
+- `center (Coord)`: The cube coordinate of the center point of the source hexagon.
 
 ##### Returns
-- `(Edge[])`: Returns an array of cube coordinates pairs for edges of the source hexagon.
+- `(Edge[])`: Returns an array of corner point pairs representing the edges of the source hexagon.
 
 ##### Examples
 
 ```js
 const origin = [0, 0, 0];
 
-H.coordToEdges(origin)();
-// => [
-//  [.5, 0, -.5],
-//  [-.5, 0, .5], ????
-//  [0, 1, -1],
-//  [0, -1, 1],
-//  [1, -1, 0],
-//  [-1, 1, 0]
-//]
-```
-
-### `H.coordsToEdges(coords)()`
-#### `Coord[] → * → Edges[]`
-
-Creates a function that returns the edges of a source group of hexagons
-##### Parameters
-
-- `coords (Coord[])`: The array of cube coordinate of a source group of hexagon.
-
-##### Returns
-- `(Edge[])`: Returns an array of cube coordinates pairs for edges of the source hexagon.
-
-##### Examples
-
-```js
-const origin = [0, 0, 0];
-
-H.coordToEdges(origin)();
-// => [
-//  [.5, 0, -.5],
-//  [-.5, 0, .5], ????
-//  [0, 1, -1],
-//  [0, -1, 1],
-//  [1, -1, 0],
-//  [-1, 1, 0]
-//]
+H.centerToEdges(origin)();
+// => 
+// [ 
+//   [ 
+//     [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ],
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ] 
+//   ],
+//   [ 
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ],
+//     [ -0.6666666666666666, 0.3333333333333333, 0.3333333333333333 ] 
+//   ],
+//   [ 
+//     [ -0.6666666666666666, 0.3333333333333333, 0.3333333333333333 ],
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ] 
+//   ],
+//   [ 
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ],
+//     [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ] 
+//   ],
+//   [ 
+//     [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ],
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ] 
+//   ],
+//   [ 
+//     [ -0.3333333333333333, 0.6666666666666666, -0.3333333333333333 ],
+//     [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ] 
+//   ]
+// ]
 ```
 
 
