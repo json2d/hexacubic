@@ -1,11 +1,44 @@
 const H = require("./../lib/index");
 const constants = require("./../lib/constants");
+const comparators = require("./../lib/comparators");
 
 const origin = [0, 0, 0];
 const neighborOfOrigin = [0, 1, -1];
 const nonNeighborOfOrigin = [0, 5, -5];
 const invalidCoord = [1, 1, 1];
 const validCoord = [0, 0, 0];
+
+const floatyCoordA = [
+  0.33333333333333337,
+  0.3333333333333333,
+  -0.6666666666666667
+];
+const floatyCoordB = [
+  0.3333333333333333,
+  0.33333333333333337,
+  -0.6666666666666666
+];
+
+const floatyEdgeA = [
+  [0.33333333333333337, 0.3333333333333333, -0.6666666666666667],
+  [0.6666666666666666, -0.33333333333333337, -0.3333333333333333]
+];
+const floatyEdgeB = [
+  [0.3333333333333333, 0.33333333333333337, -0.6666666666666666],
+  [0.66666666666666667, -0.3333333333333333, -0.33333333333333337]
+];
+
+describe("comparators", () => {
+  test("coords", () => {
+    expect(comparators.coords(origin, origin)).toBeTruthy();
+    expect(comparators.coords(origin, neighborOfOrigin)).not.toBeTruthy();
+
+    expect(comparators.coords(floatyCoordA, floatyCoordB)).toBeTruthy();
+  });
+  test("edges", () => {
+    expect(comparators.edges(floatyEdgeA, floatyEdgeB)).toBeTruthy();
+  });
+});
 
 describe("neighborsOf()", () => {
   test("basic usage", () => {
