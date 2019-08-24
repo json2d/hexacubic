@@ -235,7 +235,7 @@ const edges = H.edgesOfEvery(originAndNeighbors)({distinct: true});
 ```
 
 
-### `H.boundaryOfEvery(centers)()`
+### `H.boundaryEdgesOfEvery(centers)()`
 #### `Coord[] → * → Edges[]`
 
 Creates a function that returns the edges of the boundary of every source hexagon specified.
@@ -256,7 +256,7 @@ const originAndNeighbors = [
     ...H.neighborsOf(origin)()
 ]
 
-H.boundaryOfEvery(originAndNeighbors)();
+H.boundaryEdgesOfEvery(originAndNeighbors)();
 // => 
 // [ 
 //   ... 18 edges total (3 edges on boundary for each neighbor of origin)

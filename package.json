@@ -34,8 +34,8 @@
     "prettier-eslint-cli": "^5.0.0"
   },
   "dependencies": {
+    "float": "^1.0.2",
     "lodash.flatmap": "^4.5.0",
-    "lodash.isequal": "^4.5.0",
-    "lodash.reverse": "^4.0.1"
+    "lodash.isequalwith": "^4.4.0"
   }
 }
