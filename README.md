@@ -8,7 +8,7 @@
 
 ## `⬢ → *` 
 
-A functional Javacript utility library for working with hexagon grids
+A mathy Javacript utility library for working with hexagon grids functionally
 
 # Getting started
 
