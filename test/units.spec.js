@@ -22,10 +22,11 @@ describe("neighborsOf()", () => {
 
 describe("isNeighborOf()", () => {
   test("basic usage", () => {
-    const isNeighborOfOrigin = H.isNeighborOf(origin);
+    expect(H.isNeighborOf(origin)(neighborOfOrigin)).toBeTruthy();
+    expect(H.isNeighborOf(neighborOfOrigin)(origin)).toBeTruthy();
 
-    expect(isNeighborOfOrigin(neighborOfOrigin)).toBeTruthy();
-    expect(isNeighborOfOrigin(nonNeighborOfOrigin)).not.toBeTruthy();
+    expect(H.isNeighborOf(origin)(nonNeighborOfOrigin)).not.toBeTruthy();
+    expect(H.isNeighborOf(nonNeighborOfOrigin)(origin)).not.toBeTruthy();
   });
   test.skip("exceptions", () => {
     expect(() => H.isNeighborOf(invalidCoord)).toThrow();
