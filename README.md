@@ -35,15 +35,14 @@ import H from 'hexda'
 
 # API
 
-### `H.neighborsOf(center)([grid])`
-#### `Coord → * → [Coord]`
+### `H.neighborsOf(center)`
+#### `Coord → [Coord]`
 
 Creates a function that returns an array of cube coordinates that are neighbors to `coord`.
 
 ##### Parameters
 
 - `center (Coord)`: The source cube coordinate.
-- `[grid] (Hexagon[])`: the target sparse finite grid of hexagons, default is an infinite grid of hexagons
 ##### Returns
 - `([Coord])`: Returns an array of cube coordinates for neighbors.
 
@@ -52,7 +51,7 @@ Creates a function that returns an array of cube coordinates that are neighbors 
 ```js
 const origin = [0, 0, 0];
 
-H.neighborsOf(origin)();
+H.neighborsOf(origin);
 // => 
 // [
 //  [1, 0, -1],
@@ -96,7 +95,7 @@ H.isNeighborOf(patty)(selma);
 // => false
 ```
 
-### `H.cornersOf(center)()`
+### `H.cornersOf(center)`
 #### `Coord → * → Coord[]`
 
 Creates a function that returns the corners of a source hexagon
@@ -112,7 +111,7 @@ Creates a function that returns the corners of a source hexagon
 ```js
 const origin = [0, 0, 0];
 
-H.cornersOf(origin)();
+H.cornersOf(origin);
 // => 
 //[ 
 //   [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ],
@@ -124,8 +123,8 @@ H.cornersOf(origin)();
 // ]
 ```
 
-### `H.edgesOf(center)()` [aliases: `H.boundaryOf`]
-#### `Coord → * → Edges[]`
+### `H.edgesOf(center)` [aliases: `H.boundaryOf`]
+#### `Coord → Edges[]`
 
 Creates a function that returns the edges of a source hexagon
 ##### Parameters
@@ -140,7 +139,7 @@ Creates a function that returns the edges of a source hexagon
 ```js
 const origin = [0, 0, 0];
 
-H.edgesOf(origin)();
+H.edgesOf(origin);
 // => 
 // [ 
 //   [ 
@@ -170,8 +169,8 @@ H.edgesOf(origin)();
 // ]
 ```
 
-### `H.edgesOfEvery(centers)()`
-#### `Coord[] → * → Edges[]`
+### `H.edgesOfEvery(centers)`
+#### `Coord[] → Edges[]`
 
 Creates a function that returns the edges of every source hexagon specified.
 ##### Parameters
@@ -188,10 +187,10 @@ const origin = [0, 0, 0];
 
 const originAndNeighbors = [
     origin,
-    ...H.neighborsOf(origin)()
+    ...H.neighborsOf(origin)
 ]
 
-H.edgesOfEvery(originAndNeighbors)();
+H.edgesOfEvery(originAndNeighbors);
 // => 
 // [ 
 //   [ 
@@ -225,7 +224,7 @@ H.edgesOfEvery(originAndNeighbors)();
 Because neighbor hexagons share edges, it may be desireable to dedupe:
 
 ```js
-const edges = H.edgesOfEvery(originAndNeighbors)();
+const edges = H.edgesOfEvery(originAndNeighbors);
 const distinctEdges = _.distinct(edges)
 ```
 
@@ -235,8 +234,8 @@ const edges = H.edgesOfEvery(originAndNeighbors)({distinct: true});
 ```
 
 
-### `H.boundaryEdgesOfEvery(centers)()`
-#### `Coord[] → * → Edges[]`
+### `H.boundaryEdgesOfEvery(centers)`
+#### `Coord[] → Edges[]`
 
 Creates a function that returns the edges of the boundary of every source hexagon specified.
 ##### Parameters
@@ -253,10 +252,10 @@ const origin = [0, 0, 0];
 
 const originAndNeighbors = [
     origin,
-    ...H.neighborsOf(origin)()
+    ...H.neighborsOf(origin)
 ]
 
-H.boundaryEdgesOfEvery(originAndNeighbors)();
+H.boundaryEdgesOfEvery(originAndNeighbors);
 // => 
 // [ 
 //   ... 18 edges total (3 edges on boundary for each neighbor of origin)
