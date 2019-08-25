@@ -277,3 +277,6 @@ const edges = H.edgesOfEvery(hexagons);
 const boundaryEdges = edges.reduce(H.reducers.boundaryEdges);
 ```
 
+### `H.projectionOf({size,orientation,fov})(coord)
+
+Creates a function that projects cube coordinates to a plane of view
