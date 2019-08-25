@@ -35,16 +35,16 @@ import H from 'hexda'
 
 # API
 
-### `H.neighborsOf(center)`
+### `H.neighborsOf(hexagon)`
 #### `Coord → [Coord]`
 
 Creates a function that returns an array of cube coordinates that are neighbors to `coord`.
 
 ##### Parameters
 
-- `center (Coord)`: The source cube coordinate.
+- `hexagon (Coord)`: The cube coordinate of the center point of the source hexagon.
 ##### Returns
-- `([Coord])`: Returns an array of cube coordinates for neighbors.
+- `([Coord])`: Returns an array of cube coordinates of the neighbor hexagons of the source hexagon.
 
 ##### Examples
 
@@ -63,18 +63,18 @@ H.neighborsOf(origin);
 //]
 ```
 
-### `H.isNeighborOf(centerA)(centerB)`
+### `H.isNeighborOf(hexagonA)(hexagonB)`
 #### `Coord → Coord → Boolean`
 
-Creates a predicate function that evaluates if `centerB` is a neighbor of `centerA`.
+Creates a predicate function that evaluates if `hexagonB` is a neighbor of `hexagonA`.
 
 ##### Parameters
 
-- `centerA (Coord)`: The source cube coordinate.
-- `centerB (Coord)`: The target cube coordinate.
+- `hexagonA (Coord)`: The cube coordinate of the center point of the source hexagon.
+- `hexagonB (Coord)`: The cube coordinate of the center point of the target hexagon.
 
 ##### Returns
-- `(Boolean)`: Returns `true` if neighbors, else `false`.
+- `(Boolean)`: Returns `true` if source and target hexagons are neighbors, else `false`.
 
 ##### Examples
 
@@ -95,16 +95,16 @@ H.isNeighborOf(patty)(selma);
 // => false
 ```
 
-### `H.cornersOf(center)`
-#### `Coord → * → Coord[]`
+### `H.cornersOf(hexagon)`
+#### `Coord → Coord[]`
 
 Creates a function that returns the corners of a source hexagon
 ##### Parameters
 
-- `center (Coord)`: The cube coordinate of the center point of the source hexagon.
+- `hexagon (Coord)`: The cube coordinate of the center point of the source hexagon.
 
 ##### Returns
-- `(Coord[])`: Returns an array of cube coordinates of corner points of the source hexagon.
+- `(Coord[])`: Returns an array of cube coordinates of the corner points of the source hexagon.
 
 ##### Examples
 
@@ -123,13 +123,13 @@ H.cornersOf(origin);
 // ]
 ```
 
-### `H.edgesOf(center)` [aliases: `H.boundaryOf`]
+### `H.edgesOf(hexagon)` [aliases: `H.boundaryOf`]
 #### `Coord → Edges[]`
 
 Creates a function that returns the edges of a source hexagon
 ##### Parameters
 
-- `center (Coord)`: The cube coordinate of the center point of the source hexagon.
+- `hexagon (Coord)`: The cube coordinate of the center point of the source hexagon.
 
 ##### Returns
 - `(Edge[])`: Returns an array of corner point pairs representing the edges of the source hexagon.
@@ -169,16 +169,16 @@ H.edgesOf(origin);
 // ]
 ```
 
-### `H.edgesOfEvery(centers)`
+### `H.edgesOfEvery(hexagons)`
 #### `Coord[] → Edges[]`
 
 Creates a function that returns the edges of every source hexagon specified.
 ##### Parameters
 
-- `centers (Coord[])`: The array of cube coordinate of the center point of every source hexagon.
+- `hexagons (Coord[])`: The array of cube coordinate of the center point of the source hexagons.
 
 ##### Returns
-- `(Edge[])`: Returns an array of corner point pairs representing the edges of every source hexagon.
+- `(Edge[])`: Returns an array of corner point pairs, or edges, of every source hexagon.
 
 ##### Examples
 
@@ -224,26 +224,32 @@ H.edgesOfEvery(originAndNeighbors);
 Because neighbor hexagons share edges, it may be desireable to dedupe:
 
 ```js
+const _ = requre("lodash");
+
 const edges = H.edgesOfEvery(originAndNeighbors);
-const distinctEdges = _.distinct(edges)
+const dedupedEdges = _.uniqWith(edges, H.isEqualEdge)
 ```
 
-You can also use the `distinct` option:
+more functionally:
+
 ```js
-const edges = H.edgesOfEvery(originAndNeighbors)({distinct: true});
+const _ = requre("lodash/fp");
+
+const uniqEdge = _.uniqWith(H.isEqualEdge);
+
+const dedupedEdges = _.compose(uniqEdge, H.edgesOfEvery)(originAndNeighbors);    
 ```
 
-
-### `H.boundaryEdgesOfEvery(centers)`
+### `H.boundaryEdgesOfEvery(hexagons)`
 #### `Coord[] → Edges[]`
 
 Creates a function that returns the edges of the boundary of every source hexagon specified.
 ##### Parameters
 
-- `centers (Coord[])`: The array of cube coordinate of the center point of every source hexagon.
+- `hexagons (Coord[])`: The array of cube coordinate of the center point of every source hexagon.
 
 ##### Returns
-- `(Edge[])`: Returns an array of corner point pairs representing the edges of the boundary of every source hexagon.
+- `(Edge[])`: Returns an array of the edges of the boundary around the cluster(s) of source hexagons.
 
 ##### Examples
 
