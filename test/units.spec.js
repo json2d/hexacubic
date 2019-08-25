@@ -76,6 +76,11 @@ describe("neighborsOf()", () => {
     expect(neighborsOfOrigin).not.toContainEqual([0, 0, 0]);
     expect(neighborsOfOrigin).not.toContainEqual([2, 0, -2]);
   });
+  test("every", () => {
+    const neighborsOfGroup = H.neighborsOf.every([origin, neighborOfOrigin]);
+
+    expect(neighborsOfGroup.length).toEqual(8);
+  });
   test.skip("exceptions", () => {
     expect(() => H.neighborsOf(invalidCoord)).toThrow();
   });
@@ -100,6 +105,12 @@ describe("cornersOf()", () => {
     const cornersOfOrigin = H.cornersOf(origin);
 
     expect(cornersOfOrigin).toEqual(constants.CORNER_OFFSETS);
+    // expect(cornersOfOrigin.every(H.isCorner)).toBeTruthy();
+  });
+  test("every", () => {
+    const cornersOfGroup = H.cornersOf.every([origin, neighborOfOrigin]);
+
+    expect(cornersOfGroup.length).toEqual(12);
     // expect(cornersOfOrigin.every(H.isCorner)).toBeTruthy();
   });
   test.skip("exceptions", () => {
