@@ -268,4 +268,12 @@ H.boundaryEdgesOfEvery(originAndNeighbors);
 // ]
 ```
 
+### `H.reducers.boundaryEdges(accumulator, edge, edgeIndex, edges)`
+
+A function that accumlates an edge if it is a boundary edge with respect to a group of edges
+
+```js
+const edges = H.edgesOfEvery(hexagons);
+const boundaryEdges = edges.reduce(H.reducers.boundaryEdges);
+```
 
