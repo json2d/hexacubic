@@ -1,31 +1,39 @@
 ## Naming Convention
 
-> "The hardest problem left in computer science is this thing we haven't figured out the best name for yet." - Future Programmers
+> "The hardest problem left in computer science is this thing we haven't really figured out the best name for yet." _- Programmers of the Future_
 
-Here are some thoughts on the naming conventions used in this library:
+Here are some of the thoughts that went into deciding the naming conventions used in this library:
 
-Lets consider the function that takes a hexacube point and returns its corner points - here's two ways we can go:
+### Getting Started
+
+Lets consider our function that takes a hexacube point and returns its corner points - here are two ways we can go:
 
 ```js
 H.toCorners(hexacube) // imperative function name - eg. `mapStateToProp`
 H.cornersOf(hexacube) // declarative function name - eg. `propsOfState`
 ```
 
-So the question becomes: should a function name be imperative or declarative?
+Ok great, now we're faced with the question: should a function name be imperative or declarative?
 
-Here the example function name `propsOfState` really describes what the output is, not the process of creating the output.
+Lets consider the example function name `propsOfState`: this name actually describes what the output is, not the process of creating the output.
 
-But on the other hand, `propsOfState` could be considered and presumed to be the declarative shorthand of the imperative `getPropsOfState`.
+But on the other hand, `propsOfState` might be considered and presumed to be the declarative shorthand of the imperative `getPropsOfState`.
 
-Declarative function names are pretty widely adopted in the wild and in many popular libraries - eg. Redux has `actionCreators` which are functions that return actions.
+In reality, declarative function names are pretty widely adopted in the wild and in many popular libraries - eg. Redux has `actionCreators` which are functions that return actions.
 
-Its also common to name your function after the specific type of function it is - eg. `actionThunk`
+Its also somehwat common to name functions after the specific type of function it is - eg. `actionThunk`
 
-Another way to frame the question of imperative vs declarative is to as should the name be a verb vs a noun?
+##### Verbage vs Nounage
+
+Another way the question of imperative vs declarative can be framed is to ask whether function names should be verbs or nouns.
 
 When choosing a noun, it seems to make the most sense to choose a noun that describes a thing _that does something_ to imbue it that hint to the intuitution that this is a function - eg. `propsCreator` vs `propsOfState`
 
-While our actual function name `cornersOf` isn't a noun of the type described above, it does have something else going on: it ends with a preposition! (`of`) With that there's the implication of a object of that preposition, and that appears to be that hint to our brain that this is a function, and that the object of that preposition is the argument.
+While our function name `cornersOf` isn't a noun of the type described above, it does have something else going on: 
+
+It ends with a preposition! (`of`) 
+
+With that there's the implication of a object of that preposition, and that appears to be that hint to our brain that this is a function, and that the object of that preposition is the argument.
 
 ### Plurality
 
@@ -36,11 +44,11 @@ Some decent suffices and prefices are: `many`, `every`, `all`
 `many` seems to be a good fit - here's how it gets applied to the imperative and declarative function names:
 
 ```js
-H.cornersOfMany(hexacubes)
-H.manyToCorners(hexacubes)
+H.cornersOfMany(hexacubes) // suffixed to declaratives
+H.manyToCorners(hexacubes) // prefixed to imperatives 
 ```
 
-here the declarative version sounds a bit more natural, but both work well.
+Here the declarative version sounds a bit more natural, though both work atleast well enough.
 
 ### Enhanceability
 
@@ -65,11 +73,14 @@ H.cornersOfOneWith(options)(hexacube)
 Meanwhile the imperatives with the `to` suffix are not breaking a sweat using the suffix `with`:
 
 ```js
+H.toNeighbors(hexacube)
+H.toNeighborsWith(options)(hexacube)
+
 H.toEdges(hexacube)
 H.toEdgesWith(options)(hexacube)
 
-H.toNeighbors(hexacube)
-H.toNeighborsWith(options)(hexacube)
+H.toBounds(hexacube)
+H.toBoundsWith(options)(hexacube)
 
 H.toProjection(hexacube)
 H.toProjectionWith(options)(hexacube)
@@ -121,7 +132,7 @@ hexacubeWorlds.map(H.cornersOfManyWith(options)) // ✅
 Imperativeness also work ok for reducer functions:
 
 ```js
-edges.reduce(H.accumulateBoundaryEdges)
+edges.reduce(H.accumulateBounds)
 ```
 
 The best when a single verb does the job:
@@ -139,5 +150,37 @@ H.cornersOf.every(hexacubes)
 ```
 
 But at second glance its pretty weird and non-intuitive, and even more so because it wont show up well in autocomplete features for editors
+
+...
+
+### A bit Deeper
+
+Lets consider the most practically verbose function names I've encountered in the wild:
+
+```js
+mapStateToProps(state) // from React-Redux
+```
+
+This breaks down what each component is contributing:
+- `map` - a verb describing an process
+- `state` - a noun object describing the input argument
+- `to` - a preposition of the verb-object pair
+- `props` - a noun object of the preposition describing the output argument
+
+Indeed this function is telling us alot about how we should expect to it to behave, including what kind of input it takes and what kind of output it generates.
+
+This naming convention could (fanciely) be called __imperatively transformative__, in that it describes the transformation of an input into an output - the basis of what functions do.
+
+If you take shorthands of this name, you can see how some of the information about the function's behavior becomes implicit:
+
+```js
+mapToProps(state) // still ok: the input is named well in this example
+toProps(state) // still ok: the input is named well in this example
+
+mapState(state) // hmm, map state to what now? ❌ 
+mapProps(state) // still ok, but maybe a bit ambiguous whether `props` is the input or output
+
+stateToProps(state) // still ok: the preposition `to` makes this imperative, so we dont need `map` for that
+```
 
 ...
