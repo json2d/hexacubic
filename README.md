@@ -277,6 +277,18 @@ const edges = H.edgesOfEvery(hexagons);
 const boundaryEdges = edges.reduce(H.reducers.boundaryEdges);
 ```
 
-### `H.projectionOf({size,orientation,fov})(coord)
+### `H.projectionOf(coord)
 
-Creates a function that projects cube coordinates to a plane of view
+A function that projects cube coordinates isometrically to plane of view, where x-axis is the horizontal axis and y-axis and z-axis are the diagonal axis
+
+```js
+H.projectionOf(origin)
+// => [0, 0, 0]
+
+H.cornersOf(origin)
+  .map(_.compose(someTransform, H.projectionOf))
+  .map(([x,y]) => <Point x={x} y={y}/>)
+// =>
+
+```
+
