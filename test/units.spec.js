@@ -9,6 +9,9 @@ const nonNeighborOfOrigin = [0, 5, -5];
 const invalidCoord = [1, 1, 1];
 const validCoord = [0, 0, 0];
 
+const floatyA = 0.33333333333333337;
+const floatyB = 0.3333333333333333;
+
 const floatyCoordA = [
   0.33333333333333337,
   0.3333333333333333,
@@ -30,14 +33,26 @@ const floatyEdgeB = [
 ];
 
 describe("utils", () => {
+  test("roundFloat", () => {
+    expect(utils.roundFloat(floatyA)).toEqual(utils.roundFloat(floatyB));
+    expect(utils.roundFloat(floatyA)).not.toEqual(floatyA);
+  });
+
   test("encodeCoord", () => {
     const enA = utils.encodeCoord(floatyCoordA);
     const enB = utils.encodeCoord(floatyCoordB);
+    const enC = utils.encodeCoord(origin);
 
     expect(enA).toEqual(enB);
+    expect(enA).not.toEqual(enC);
   });
-  test("edges", () => {
-    expect(comparators.edges(floatyEdgeA, floatyEdgeB)).toBeTruthy();
+  test("encodeEdge", () => {
+    const enA = utils.encodeEdge(floatyEdgeA);
+    const enB = utils.encodeEdge(floatyEdgeB);
+    const enC = utils.encodeEdge(H.edgesOf(nonNeighborOfOrigin)()[0]);
+
+    expect(enA).toEqual(enB);
+    expect(enA).not.toEqual(enC);
   });
 });
 
