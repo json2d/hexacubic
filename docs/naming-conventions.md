@@ -161,26 +161,38 @@ Lets consider the most practically verbose function names I've encountered in th
 mapStateToProps(state) // from React-Redux
 ```
 
-This breaks down what each component is contributing:
+Here's a breakdown of what each component is contributing our overall understanding of how the function behaves:
 - `map` - a verb describing an process
 - `state` - a noun object describing the input argument
 - `to` - a preposition of the verb-object pair
 - `props` - a noun object of the preposition describing the output argument
 
-Indeed this function is telling us alot about how we should expect to it to behave, including what kind of input it takes and what kind of output it generates.
+Indeed this function is telling us alot about how we should expect, including what kind of input it takes and what kind of output it generates.
 
-This naming convention could (fanciely) be called __imperatively transformative__, in that it describes the transformation of an input into an output - the basis of what functions do.
+This naming convention could perhaps (fanciely) be called __imperatively transformative__, in that it describes the transformation of an input into an output - the basis of what functions do.
 
 If you take shorthands of this name, you can see how some of the information about the function's behavior becomes implicit:
 
 ```js
-mapToProps(state) // still ok: the input is named well in this example
-toProps(state) // still ok: the input is named well in this example
+mapToProps(state) // still ok: the input is well-named in this example atleast
+toProps(state) // still ok: the input is well-named in this example atleast
 
 mapState(state) // hmm, map state to what now? ❌ 
 mapProps(state) // still ok, but maybe a bit ambiguous whether `props` is the input or output
 
 stateToProps(state) // still ok: the preposition `to` makes this imperative, so we dont need `map` for that
+```
+
+Quite similar to how a well-named parameter can hint what the input should be, so can calling function with a named scope - eg. with functions from static classes
+
+```js
+State.toProps(state) // ok: state to props, got it.
+```
+
+Context can be luckily derived from certain situations, but not always.
+
+```js
+states.map(toProps)
 ```
 
 ...
