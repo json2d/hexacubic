@@ -1,6 +1,7 @@
 const H = require("./../lib/index");
 const constants = require("./../lib/constants");
 const comparators = require("./../lib/comparators");
+const utils = require("./../lib/utils");
 
 const origin = [0, 0, 0];
 const neighborOfOrigin = [0, 1, -1];
@@ -27,6 +28,19 @@ const floatyEdgeB = [
   [0.3333333333333333, 0.33333333333333337, -0.6666666666666666],
   [0.66666666666666667, -0.3333333333333333, -0.33333333333333337]
 ];
+
+describe("utils", () => {
+  test("encodeCoord", () => {
+    const enA = utils.encodeCoord(floatyCoordA);
+    const enB = utils.encodeCoord(floatyCoordB);
+
+    expect(enA).toEqual(enB);
+  });
+  test("edges", () => {
+    expect(comparators.edges(floatyEdgeA, floatyEdgeB)).toBeTruthy();
+  });
+});
+
 
 describe("comparators", () => {
   test("coords", () => {
