@@ -38,7 +38,7 @@ import H from 'hexda'
 ### `H.neighborsOf(hexagon)`
 #### `Coord → [Coord]`
 
-Creates a function that returns an array of cube coordinates that are neighbors to `coord`.
+A function that returns an array of cube coordinates that are neighbors to `coord`.
 
 ##### Parameters
 
@@ -98,7 +98,7 @@ H.isNeighborOf(patty)(selma);
 ### `H.cornersOf(hexagon)`
 #### `Coord → Coord[]`
 
-Creates a function that returns the corners of a source hexagon
+A function that returns the corners of a source hexagon
 ##### Parameters
 
 - `hexagon (Coord)`: The cube coordinate of the center point of the source hexagon.
@@ -126,7 +126,7 @@ H.cornersOf(origin);
 ### `H.edgesOf(hexagon)` [aliases: `H.boundaryOf`]
 #### `Coord → Edges[]`
 
-Creates a function that returns the edges of a source hexagon
+A function that returns the edges of a source hexagon
 ##### Parameters
 
 - `hexagon (Coord)`: The cube coordinate of the center point of the source hexagon.
@@ -172,7 +172,7 @@ H.edgesOf(origin);
 ### `H.edgesOfEvery(hexagons)`
 #### `Coord[] → Edges[]`
 
-Creates a function that returns the edges of every source hexagon specified.
+A function that returns the edges of every source hexagon specified.
 ##### Parameters
 
 - `hexagons (Coord[])`: The array of cube coordinate of the center point of the source hexagons.
@@ -243,7 +243,7 @@ const dedupedEdges = _.compose(uniqEdge, H.edgesOfEvery)(originAndNeighbors);
 ### `H.boundaryEdgesOfEvery(hexagons)`
 #### `Coord[] → Edges[]`
 
-Creates a function that returns the edges of the boundary of every source hexagon specified.
+A function that returns the edges of the boundary of every source hexagon specified.
 ##### Parameters
 
 - `hexagons (Coord[])`: The array of cube coordinate of the center point of every source hexagon.
