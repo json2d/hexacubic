@@ -41,7 +41,6 @@ describe("utils", () => {
   });
 });
 
-
 describe("comparators", () => {
   test("coords", () => {
     expect(comparators.coords(origin, origin)).toBeTruthy();
