@@ -283,12 +283,18 @@ A function that projects cube coordinates isometrically to plane of view, where 
 
 ```js
 H.projectionOf(origin)
-// => [0, 0, 0]
+// => [0, 0]
 
 H.cornersOf(origin)
-  .map(_.compose(someTransform, H.projectionOf))
+  .map(_.compose(customTransform, H.projectionOf))
   .map(([x,y]) => <Point x={x} y={y}/>)
 // =>
 
+const customProjectionOf = _.compose(customTransform, H.projectionOf)
+
+H.edgesOf(origin)
+  .map(edge => edge.map(customProjectionOf))
+  .map(([[Ax,Ay],[Bx,By]]) => <Line Ax={Ax} Ay={Ay} Bx={Bx} By={By}/>)
+// =>
 ```
 
