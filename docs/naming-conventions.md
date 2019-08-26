@@ -105,7 +105,7 @@ hexacubes.map(H.getProjection)
 
 Having a consistent naming convention can be contagious!
 ```js
-const toCustomProjection = H.toProjectionWith({orientation: H.constants.POINTY_HEXAGON, size: 3})
+const toCustomProjection = H.toProjectionWith({orientation: H.orientations.POINTY, size: 3})
 toCustomProjection(hexacube);
 ```
 
