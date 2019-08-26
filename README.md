@@ -96,7 +96,7 @@ H.isNeighborOf(patty)(selma);
 ```
 
 ### `H.cornersOf(hexacube)`
-#### `Point → Point[]`
+#### `Point → [Point]`
 
 Takes a hexacube center point and returns its corner points.
 
@@ -105,7 +105,7 @@ Takes a hexacube center point and returns its corner points.
 - `hexacube (Point)`: The center point of the hexacube.
 
 ##### Returns
-- `(Point[])`: Returns an array of corner points of the hexacube.
+- `([Point])`: Returns an array of corner points of the hexacube.
 
 ##### Examples
 
@@ -134,7 +134,7 @@ Takes a hexacube center point and returns its edges.
 - `hexacube (Point)`: The center point of the hexacube.
 
 ##### Returns
-- `(Edge[])`: Returns an array of corner point pairs representing the edges of the hexacube.
+- `([Edge])`: Returns an array of corner point pairs representing the edges of the hexacube.
 
 ##### Examples
 
@@ -172,16 +172,16 @@ H.edgesOf(origin);
 ```
 
 ### `H.edgesOfMany(hexacubes)`
-#### `Point[] → Edges[]`
+#### `[Point] → [Edge]`
 
 Takes a set of hexacube center points returns all the edges.
 
 ##### Parameters
 
-- `hexacubes (Point[])`: The array of center points of the hexacubes.
+- `hexacubes ([Point])`: The array of center points of the hexacubes.
 
 ##### Returns
-- `(Edge[])`: Returns an array of corner point pairs, or edges, of every hexacube.
+- `([Edge])`: Returns an array of corner point pairs, or edges, of every hexacube.
 
 ##### Examples
 
@@ -244,16 +244,16 @@ const dedupedEdges = _.compose(uniqEdge, H.edgesOfMany)(originAndNeighbors);
 ```
 
 ### `H.boundsOfMany(hexacubes)`
-#### `Point[] → Edges[]`
+#### `[Point] → Edges[]`
 
 Takes a set of hexacube center points and returns the edges of its boundary.
 
 ##### Parameters
 
-- `hexacubes (Point[])`: The array of the center points of the hexacubes.
+- `hexacubes ([Point])`: The array of the center points of the hexacubes.
 
 ##### Returns
-- `(Edge[])`: Returns an array of the edges of the boundary around the cluster(s) of hexacubes.
+- `([Edge])`: Returns an array of the edges of the boundary around the cluster(s) of hexacubes.
 
 ##### Examples
 
