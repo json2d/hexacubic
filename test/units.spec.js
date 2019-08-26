@@ -100,28 +100,28 @@ describe("isNeighborOf()", () => {
   });
 });
 
-describe("cornersOf()", () => {
+describe("centerToCorners()", () => {
   test("basic usage", () => {
-    const cornersOfOrigin = H.cornersOf(origin);
+    const cornersOfOrigin = H.centerToCorners(origin);
 
     expect(cornersOfOrigin).toEqual(constants.CORNER_OFFSETS);
     // expect(cornersOfOrigin.every(H.isCorner)).toBeTruthy();
   });
   test("every", () => {
-    const cornersOfGroup = H.cornersOf.every([origin, neighborOfOrigin]);
+    const cornersOfGroup = H.centerToCorners.every([origin, neighborOfOrigin]);
 
     expect(cornersOfGroup.length).toEqual(12);
     // expect(cornersOfOrigin.every(H.isCorner)).toBeTruthy();
   });
   test.skip("exceptions", () => {
-    expect(() => H.cornersOf(invalidPoint)).toThrow();
+    expect(() => H.centerToCorners(invalidPoint)).toThrow();
   });
 });
 
 describe("edgesOf()", () => {
   test("basic usage", () => {
     const edgesOfOrigin = H.edgesOf(origin);
-    const cornersOfOrigin = H.cornersOf(origin);
+    const cornersOfOrigin = H.centerToCorners(origin);
 
     expect(edgesOfOrigin.length).toEqual(6);
 

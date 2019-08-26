@@ -95,7 +95,7 @@ H.isNeighborOf(patty)(selma);
 // => false
 ```
 
-### `H.cornersOf(hexacube)`
+### `H.centerToCorners(hexacube)`
 #### `Point → [Point]`
 
 Takes a hexacube center point and returns its corner points.
@@ -112,7 +112,7 @@ Takes a hexacube center point and returns its corner points.
 ```js
 const origin = [0, 0, 0];
 
-H.cornersOf(origin);
+H.centerToCorners(origin);
 // => 
 //[ 
 //   [ 0.3333333333333333, 0.3333333333333333, -0.6666666666666666 ],
@@ -277,7 +277,7 @@ Projects a hexacubic point isometrically to a plane of view, where x-axis is the
 H.projectionOf(origin)
 // => [0, 0]
 
-H.cornersOf(origin)
+H.centerToCorners(origin)
   .map(_.compose(customTransform, H.projectionOf))
   .map(([x,y]) => <Point x={x} y={y}/>)
 // =>
