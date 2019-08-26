@@ -35,7 +35,7 @@ import H from 'hexacubic'
 
 # API
 
-### `H.neighborsOf(hexacube)`
+### `H.centerToNeighbors(hexacube)`
 #### `Point → [Point]`
 
 Takes a hexacube center point and returns an array of center points of its neighbor hexacubes.
@@ -51,7 +51,7 @@ Takes a hexacube center point and returns an array of center points of its neigh
 ```js
 const origin = [0, 0, 0];
 
-H.neighborsOf(origin);
+H.centerToNeighbors(origin);
 // => 
 // [
 //  [1, 0, -1],
@@ -190,7 +190,7 @@ const origin = [0, 0, 0];
 
 const originAndNeighbors = [
     origin,
-    ...H.neighborsOf(origin)
+    ...H.centerToNeighbors(origin)
 ]
 
 H.centersToEdges(originAndNeighbors);
@@ -250,7 +250,7 @@ const origin = [0, 0, 0];
 
 const originAndNeighbors = [
     origin,
-    ...H.neighborsOf(origin)
+    ...H.centerToNeighbors(origin)
 ]
 
 H.centersToBounds(originAndNeighbors);

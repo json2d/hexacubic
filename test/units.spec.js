@@ -68,21 +68,21 @@ describe("comparators", () => {
   });
 });
 
-describe("neighborsOf()", () => {
+describe("centerToNeighbors()", () => {
   test("basic usage", () => {
-    const neighborsOfOrigin = H.neighborsOf(origin);
+    const neighborsOfOrigin = H.centerToNeighbors(origin);
 
     expect(neighborsOfOrigin).toEqual(constants.NEIGHBOR_OFFSETS);
     expect(neighborsOfOrigin).not.toContainEqual([0, 0, 0]);
     expect(neighborsOfOrigin).not.toContainEqual([2, 0, -2]);
   });
   test("every", () => {
-    const neighborsOfGroup = H.neighborsOf.every([origin, neighborOfOrigin]);
+    const neighborsOfGroup = H.centerToNeighbors.every([origin, neighborOfOrigin]);
 
     expect(neighborsOfGroup.length).toEqual(8);
   });
   test.skip("exceptions", () => {
-    expect(() => H.neighborsOf(invalidPoint)).toThrow();
+    expect(() => H.centerToNeighbors(invalidPoint)).toThrow();
   });
 });
 
@@ -183,7 +183,7 @@ describe("centersToBounds()", () => {
 
     expect(boundsOfNonContiguousGroup.length).toEqual(16);
 
-    const originAndNeighbors = [origin, ...H.neighborsOf(origin)];
+    const originAndNeighbors = [origin, ...H.centerToNeighbors(origin)];
 
     const boundsOfOriginAndNeighbors = H.centersToBounds(originAndNeighbors);
     expect(boundsOfOriginAndNeighbors.length).toEqual(18);
