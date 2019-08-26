@@ -174,7 +174,7 @@ H.edgesOf(origin);
 ### `H.edgesOfMany(hexacubes)`
 #### `[Point] → [Edge]`
 
-Takes a set of hexacube center points returns all the edges.
+Takes a set of hexacube center points returns all the edges. (deduped)
 
 ##### Parameters
 
@@ -224,24 +224,12 @@ H.edgesOfMany(originAndNeighbors);
 // ]
 ```
 
-Because neighbor hexacubes share edges, it may be desireable to dedupe:
+If you want all the edges with duplicates, instead `map` with `.edgesOf()`:
 
 ```js
-const _ = requre("lodash");
-
-const edges = H.edgesOfMany(originAndNeighbors);
-const dedupedEdges = _.uniqWith(edges, H.isEqualEdge)
+const edges = originAndNeighbors.map(H.edgesOf)
 ```
 
-more functionally:
-
-```js
-const _ = requre("lodash/fp");
-
-const uniqEdge = _.uniqWith(H.isEqualEdge);
-
-const dedupedEdges = _.compose(uniqEdge, H.edgesOfMany)(originAndNeighbors);    
-```
 
 ### `H.boundsOfMany(hexacubes)`
 #### `[Point] → Edges[]`
