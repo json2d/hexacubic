@@ -6,18 +6,18 @@ const utils = require("./../lib/utils");
 const origin = [0, 0, 0];
 const neighborOfOrigin = [0, 1, -1];
 const nonNeighborOfOrigin = [0, 5, -5];
-const invalidCoord = [1, 1, 1];
-const validCoord = [0, 0, 0];
+const invalidPoint = [1, 1, 1];
+const validPoint = [0, 0, 0];
 
 const floatyA = 0.33333333333333337;
 const floatyB = 0.3333333333333333;
 
-const floatyCoordA = [
+const floatyPointA = [
   0.33333333333333337,
   0.3333333333333333,
   -0.6666666666666667
 ];
-const floatyCoordB = [
+const floatyPointB = [
   0.3333333333333333,
   0.33333333333333337,
   -0.6666666666666666
@@ -38,10 +38,10 @@ describe("utils", () => {
     expect(utils.roundFloat(floatyA)).not.toEqual(floatyA);
   });
 
-  test("encodeCoord", () => {
-    const enA = utils.encodeCoord(floatyCoordA);
-    const enB = utils.encodeCoord(floatyCoordB);
-    const enC = utils.encodeCoord(origin);
+  test("encodePoint", () => {
+    const enA = utils.encodePoint(floatyPointA);
+    const enB = utils.encodePoint(floatyPointB);
+    const enC = utils.encodePoint(origin);
 
     expect(enA).toEqual(enB);
     expect(enA).not.toEqual(enC);
@@ -57,11 +57,11 @@ describe("utils", () => {
 });
 
 describe("comparators", () => {
-  test("coords", () => {
-    expect(comparators.coords(origin, origin)).toBeTruthy();
-    expect(comparators.coords(origin, neighborOfOrigin)).not.toBeTruthy();
+  test("points", () => {
+    expect(comparators.points(origin, origin)).toBeTruthy();
+    expect(comparators.points(origin, neighborOfOrigin)).not.toBeTruthy();
 
-    expect(comparators.coords(floatyCoordA, floatyCoordB)).toBeTruthy();
+    expect(comparators.points(floatyPointA, floatyPointB)).toBeTruthy();
   });
   test("edges", () => {
     expect(comparators.edges(floatyEdgeA, floatyEdgeB)).toBeTruthy();
@@ -82,7 +82,7 @@ describe("neighborsOf()", () => {
     expect(neighborsOfGroup.length).toEqual(8);
   });
   test.skip("exceptions", () => {
-    expect(() => H.neighborsOf(invalidCoord)).toThrow();
+    expect(() => H.neighborsOf(invalidPoint)).toThrow();
   });
 });
 
@@ -95,8 +95,8 @@ describe("isNeighborOf()", () => {
     expect(H.isNeighborOf(nonNeighborOfOrigin)(origin)).not.toBeTruthy();
   });
   test.skip("exceptions", () => {
-    expect(() => H.isNeighborOf(invalidCoord)).toThrow();
-    expect(() => H.isNeighborOf(validCoord)(invalidCoord)).toThrow();
+    expect(() => H.isNeighborOf(invalidPoint)).toThrow();
+    expect(() => H.isNeighborOf(validPoint)(invalidPoint)).toThrow();
   });
 });
 
@@ -114,7 +114,7 @@ describe("cornersOf()", () => {
     // expect(cornersOfOrigin.every(H.isCorner)).toBeTruthy();
   });
   test.skip("exceptions", () => {
-    expect(() => H.cornersOf(invalidCoord)).toThrow();
+    expect(() => H.cornersOf(invalidPoint)).toThrow();
   });
 });
 
@@ -135,24 +135,24 @@ describe("edgesOf()", () => {
     // expect(edgesOfOrigin.every(H.isEdge)).toBeTruthy();
   });
   test.skip("exceptions", () => {
-    expect(() => H.edgesOf(invalidCoord)).toThrow();
+    expect(() => H.edgesOf(invalidPoint)).toThrow();
   });
 });
 
-describe("edgesOfEvery()", () => {
+describe("edgesOfMany()", () => {
   test("basic usage", () => {
     const edgesOfOrigin = H.edgesOf(origin);
     const edgesOfNeighbor = H.edgesOf(neighborOfOrigin);
 
-    const edgesOfGroup = H.edgesOfEvery([origin, neighborOfOrigin]);
+    const edgesOfGroup = H.edgesOfMany([origin, neighborOfOrigin]);
 
-    expect(edgesOfOrigin).toEqual(H.edgesOfEvery([origin]));
+    expect(edgesOfOrigin).toEqual(H.edgesOfMany([origin]));
 
     expect(edgesOfGroup.length).toEqual(12);
     expect(edgesOfGroup).toEqual([...edgesOfOrigin, ...edgesOfNeighbor]);
     // expect(edgesOfOrigin.every(H.isEdge)).toBeTruthy();
 
-    const edgesOfNonContiguousGroup = H.edgesOfEvery([
+    const edgesOfNonContiguousGroup = H.edgesOfMany([
       origin,
       neighborOfOrigin,
       nonNeighborOfOrigin
@@ -160,40 +160,40 @@ describe("edgesOfEvery()", () => {
     expect(edgesOfNonContiguousGroup.length).toEqual(18);
   });
   test.skip("exceptions", () => {
-    expect(() => H.edgesOfEvery([validCoord, invalidCoord])).toThrow();
+    expect(() => H.edgesOfMany([validPoint, invalidPoint])).toThrow();
   });
 });
 
-describe("boundaryEdgesOfEvery()", () => {
+describe("boundsOfMany()", () => {
   test("basic usage", () => {
-    const boundaryEdgesOfOrigin = H.boundaryEdgesOfEvery([origin]);
+    const boundsOfOrigin = H.boundsOfMany([origin]);
 
-    expect(boundaryEdgesOfOrigin.length).toEqual(6);
+    expect(boundsOfOrigin.length).toEqual(6);
 
-    const boundaryEdgesOfGroup = H.boundaryEdgesOfEvery([
+    const boundsOfGroup = H.boundsOfMany([
       origin,
       neighborOfOrigin
     ]);
 
-    expect(boundaryEdgesOfGroup.length).toEqual(10);
+    expect(boundsOfGroup.length).toEqual(10);
     // expect(edgesOfOrigin.every(H.isEdge)).toBeTruthy();
 
-    const boundaryEdgesOfNonContiguousGroup = H.boundaryEdgesOfEvery([
+    const boundsOfNonContiguousGroup = H.boundsOfMany([
       origin,
       neighborOfOrigin,
       nonNeighborOfOrigin
     ]);
 
-    expect(boundaryEdgesOfNonContiguousGroup.length).toEqual(16);
+    expect(boundsOfNonContiguousGroup.length).toEqual(16);
 
     const originAndNeighbors = [origin, ...H.neighborsOf(origin)];
 
-    const boundaryEdgesOfOriginAndNeighbors = H.boundaryEdgesOfEvery(
+    const boundsOfOriginAndNeighbors = H.boundsOfMany(
       originAndNeighbors
     );
-    expect(boundaryEdgesOfOriginAndNeighbors.length).toEqual(18);
+    expect(boundsOfOriginAndNeighbors.length).toEqual(18);
   });
   test.skip("exceptions", () => {
-    expect(() => H.edgesOfEvery([validCoord, invalidCoord])).toThrow();
+    expect(() => H.edgesOfMany([validPoint, invalidPoint])).toThrow();
   });
 });
