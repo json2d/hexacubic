@@ -170,10 +170,7 @@ describe("boundsOfMany()", () => {
 
     expect(boundsOfOrigin.length).toEqual(6);
 
-    const boundsOfGroup = H.boundsOfMany([
-      origin,
-      neighborOfOrigin
-    ]);
+    const boundsOfGroup = H.boundsOfMany([origin, neighborOfOrigin]);
 
     expect(boundsOfGroup.length).toEqual(10);
     // expect(edgesOfOrigin.every(H.isEdge)).toBeTruthy();
@@ -188,9 +185,7 @@ describe("boundsOfMany()", () => {
 
     const originAndNeighbors = [origin, ...H.neighborsOf(origin)];
 
-    const boundsOfOriginAndNeighbors = H.boundsOfMany(
-      originAndNeighbors
-    );
+    const boundsOfOriginAndNeighbors = H.boundsOfMany(originAndNeighbors);
     expect(boundsOfOriginAndNeighbors.length).toEqual(18);
   });
   test.skip("exceptions", () => {
