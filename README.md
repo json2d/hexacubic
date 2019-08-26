@@ -18,7 +18,7 @@ Install via `yarn` or `npm`:
 yarn add hexacubic
 ```
 ```
-npm install hexacubic
+npm install hexacubic -S
 ```
 
 ### CJS
