@@ -1,5 +1,7 @@
 # all the crap that's not neccessary for the npm module to work
+docs
 test
+.DS_Store
 .eslintignore
 .eslintrc.json
 .gitignore
