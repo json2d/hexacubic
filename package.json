@@ -22,8 +22,9 @@
     "declarative",
     "composable",
     "immutable",
-    "lambda",
-    "pure"
+    "pure",
+    "cube",
+    "cubic"
   ],
   "author": "Jason Yung",
   "license": "MIT",
