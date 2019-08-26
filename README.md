@@ -6,7 +6,7 @@
 ![Travis](https://img.shields.io/travis/json2d/hexda.svg)
 ![Coveralls github](https://img.shields.io/coveralls/github/json2d/hexda.svg)
 
-## `⬢ → *` 
+## `⬢ → * → ⬡` 
 
 A mathy Javacript utility library for working with hexacubic grids functionally
 
