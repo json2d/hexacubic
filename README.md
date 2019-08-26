@@ -1,10 +1,10 @@
-# Hexda
-[![npm](https://img.shields.io/npm/v/hexda.svg)](https://www.npmjs.com/package/hexda)
-![node](https://img.shields.io/node/v/hexda.svg)
-![npm](https://img.shields.io/npm/l/hexda.svg)
-![npm](https://img.shields.io/npm/dt/hexda.svg)
-![Travis](https://img.shields.io/travis/json2d/hexda.svg)
-![Coveralls github](https://img.shields.io/coveralls/github/json2d/hexda.svg)
+# hexacubic
+[![npm](https://img.shields.io/npm/v/hexacubic.svg)](https://www.npmjs.com/package/hexacubic)
+![node](https://img.shields.io/node/v/hexacubic.svg)
+![npm](https://img.shields.io/npm/l/hexacubic.svg)
+![npm](https://img.shields.io/npm/dt/hexacubic.svg)
+![Travis](https://img.shields.io/travis/json2d/hexacubic.svg)
+![Coveralls github](https://img.shields.io/coveralls/github/json2d/hexacubic.svg)
 
 ## `⬢ → * → ⬡` 
 
@@ -15,22 +15,22 @@ A mathy Javacript utility library for working with hexacubic grids functionally
 Install via `yarn` or `npm`:
 
 ```
-yarn add hexda
+yarn add hexacubic
 ```
 ```
-npm install hexda
+npm install hexacubic
 ```
 
 ### CJS
 
 ```javascript
-const H = require('hexda')
+const H = require('hexacubic')
 ```
 
 ### ES6
 
 ```javascript
-import H from 'hexda'
+import H from 'hexacubic'
 ```
 
 # API
