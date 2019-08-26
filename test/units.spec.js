@@ -164,18 +164,18 @@ describe("centersToEdges()", () => {
   });
 });
 
-describe("boundsOfMany()", () => {
+describe("centersToBounds()", () => {
   test("basic usage", () => {
-    const boundsOfOrigin = H.boundsOfMany([origin]);
+    const boundsOfOrigin = H.centersToBounds([origin]);
 
     expect(boundsOfOrigin.length).toEqual(6);
 
-    const boundsOfGroup = H.boundsOfMany([origin, neighborOfOrigin]);
+    const boundsOfGroup = H.centersToBounds([origin, neighborOfOrigin]);
 
     expect(boundsOfGroup.length).toEqual(10);
     // expect(edgesOfOrigin.every(H.isEdge)).toBeTruthy();
 
-    const boundsOfNonContiguousGroup = H.boundsOfMany([
+    const boundsOfNonContiguousGroup = H.centersToBounds([
       origin,
       neighborOfOrigin,
       nonNeighborOfOrigin
@@ -185,7 +185,7 @@ describe("boundsOfMany()", () => {
 
     const originAndNeighbors = [origin, ...H.neighborsOf(origin)];
 
-    const boundsOfOriginAndNeighbors = H.boundsOfMany(originAndNeighbors);
+    const boundsOfOriginAndNeighbors = H.centersToBounds(originAndNeighbors);
     expect(boundsOfOriginAndNeighbors.length).toEqual(18);
   });
   test.skip("exceptions", () => {

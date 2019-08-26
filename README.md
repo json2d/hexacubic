@@ -124,8 +124,8 @@ H.centerToCorners(origin);
 // ]
 ```
 
-### `H.centerToEdges(hexacube)` [aliases: `H.boundsOf`]
-#### `Point → Edges[]`
+### `H.centerToEdges(hexacube)` [aliases: `H.centerToBounds`]
+#### `Point → [Edge]`
 
 Takes a hexacube center point and returns its edges.
 
@@ -231,8 +231,8 @@ const edges = originAndNeighbors.map(H.centerToEdges)
 ```
 
 
-### `H.boundsOfMany(hexacubes)`
-#### `[Point] → Edges[]`
+### `H.centersToBounds(hexacubes)`
+#### `[Point] → [Edge]`
 
 Takes a set of hexacube center points and returns the edges of its boundary.
 
@@ -253,7 +253,7 @@ const originAndNeighbors = [
     ...H.neighborsOf(origin)
 ]
 
-H.boundsOfMany(originAndNeighbors);
+H.centersToBounds(originAndNeighbors);
 // => 
 // [ 
 //   ... 18 edges total (3 edges on boundary for each neighbor of origin)
