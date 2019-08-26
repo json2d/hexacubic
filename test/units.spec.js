@@ -76,8 +76,8 @@ describe("centerToNeighbors()", () => {
     expect(neighborsOfOrigin).not.toContainEqual([0, 0, 0]);
     expect(neighborsOfOrigin).not.toContainEqual([2, 0, -2]);
   });
-  test("every", () => {
-    const neighborsOfGroup = H.centerToNeighbors.every([origin, neighborOfOrigin]);
+  test("many", () => {
+    const neighborsOfGroup = H.centersToNeighbors([origin, neighborOfOrigin]);
 
     expect(neighborsOfGroup.length).toEqual(8);
   });
@@ -107,10 +107,10 @@ describe("centerToCorners()", () => {
     expect(cornersOfOrigin).toEqual(constants.CORNER_OFFSETS);
     // expect(cornersOfOrigin.every(H.isCorner)).toBeTruthy();
   });
-  test("every", () => {
-    const cornersOfGroup = H.centerToCorners.every([origin, neighborOfOrigin]);
+  test("many", () => {
+    const cornersOfGroup = H.centersToCorners([origin, neighborOfOrigin]);
 
-    expect(cornersOfGroup.length).toEqual(12);
+    expect(cornersOfGroup.length).toEqual(10);
     // expect(cornersOfOrigin.every(H.isCorner)).toBeTruthy();
   });
   test.skip("exceptions", () => {
@@ -148,16 +148,15 @@ describe("centersToEdges()", () => {
 
     expect(edgesOfOrigin).toEqual(H.centersToEdges([origin]));
 
-    expect(edgesOfGroup.length).toEqual(12);
-    expect(edgesOfGroup).toEqual([...edgesOfOrigin, ...edgesOfNeighbor]);
+    expect(edgesOfGroup.length).toEqual(11);
+    expect(edgesOfGroup).not.toEqual([...edgesOfOrigin, ...edgesOfNeighbor]);
     // expect(edgesOfOrigin.every(H.isEdge)).toBeTruthy();
 
     const edgesOfNonContiguousGroup = H.centersToEdges([
       origin,
-      neighborOfOrigin,
       nonNeighborOfOrigin
     ]);
-    expect(edgesOfNonContiguousGroup.length).toEqual(18);
+    expect(edgesOfNonContiguousGroup.length).toEqual(12);
   });
   test.skip("exceptions", () => {
     expect(() => H.centersToEdges([validPoint, invalidPoint])).toThrow();

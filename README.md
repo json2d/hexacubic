@@ -224,10 +224,12 @@ H.centersToEdges(originAndNeighbors);
 // ]
 ```
 
-If you want all the edges with duplicates, instead `map` with `.centerToEdges()`:
+If you want all the edges with duplicates instead, use `flatMap` with `.centerToEdges()`:
 
 ```js
-const edges = originAndNeighbors.map(H.centerToEdges)
+import _ from "lodash/fp"
+
+const edges = _.flatMap(H.centerToEdges)(originAndNeighbors)
 ```
 
 
