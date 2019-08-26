@@ -8,7 +8,7 @@
 
 ## `⬢ → *` 
 
-A mathy Javacript utility library for working with hexagon grids functionally
+A mathy Javacript utility library for working with hexacubic grids functionally
 
 # Getting started
 
@@ -35,16 +35,16 @@ import H from 'hexda'
 
 # API
 
-### `H.neighborsOf(hexagon)`
-#### `Coord → [Coord]`
+### `H.neighborsOf(hexacube)`
+#### `Point → [Point]`
 
-A function that returns an array of cube coordinates that are neighbors to `coord`.
+Takes a hexacube center point and returns an array of center points of its neighbor hexacubes.
 
 ##### Parameters
 
-- `hexagon (Coord)`: The cube coordinate of the center point of the source hexagon.
+- `hexacube (Point)`: The center point of the hexacube.
 ##### Returns
-- `([Coord])`: Returns an array of cube coordinates of the neighbor hexagons of the source hexagon.
+- `([Point])`: Returns an array of center points of the neighbor hexacubes of the hexacube.
 
 ##### Examples
 
@@ -63,18 +63,18 @@ H.neighborsOf(origin);
 //]
 ```
 
-### `H.isNeighborOf(hexagonA)(hexagonB)`
-#### `Coord → Coord → Boolean`
+### `H.isNeighborOf(hexacubeA)(hexacubeB)`
+#### `Point → Point → Boolean`
 
-Creates a predicate function that evaluates if `hexagonB` is a neighbor of `hexagonA`.
+Creates a predicate function that evaluates if `hexacubeB` is a neighbor of `hexacubeA`.
 
 ##### Parameters
 
-- `hexagonA (Coord)`: The cube coordinate of the center point of the source hexagon.
-- `hexagonB (Coord)`: The cube coordinate of the center point of the target hexagon.
+- `hexacubeA (Point)`: The center point of the source hexacube.
+- `hexacubeB (Point)`: The center point of the target hexacube.
 
 ##### Returns
-- `(Boolean)`: Returns `true` if source and target hexagons are neighbors, else `false`.
+- `(Boolean)`: Returns `true` if source and target hexacubes are neighbors, else `false`.
 
 ##### Examples
 
@@ -95,16 +95,17 @@ H.isNeighborOf(patty)(selma);
 // => false
 ```
 
-### `H.cornersOf(hexagon)`
-#### `Coord → Coord[]`
+### `H.cornersOf(hexacube)`
+#### `Point → Point[]`
 
-A function that returns the corners of a source hexagon
+Takes a hexacube center point and returns its corner points.
+
 ##### Parameters
 
-- `hexagon (Coord)`: The cube coordinate of the center point of the source hexagon.
+- `hexacube (Point)`: The center point of the hexacube.
 
 ##### Returns
-- `(Coord[])`: Returns an array of cube coordinates of the corner points of the source hexagon.
+- `(Point[])`: Returns an array of corner points of the hexacube.
 
 ##### Examples
 
@@ -123,16 +124,17 @@ H.cornersOf(origin);
 // ]
 ```
 
-### `H.edgesOf(hexagon)` [aliases: `H.boundaryOf`]
-#### `Coord → Edges[]`
+### `H.edgesOf(hexacube)` [aliases: `H.boundsOf`]
+#### `Point → Edges[]`
 
-A function that returns the edges of a source hexagon
+Takes a hexacube center point and returns its edges.
+
 ##### Parameters
 
-- `hexagon (Coord)`: The cube coordinate of the center point of the source hexagon.
+- `hexacube (Point)`: The center point of the hexacube.
 
 ##### Returns
-- `(Edge[])`: Returns an array of corner point pairs representing the edges of the source hexagon.
+- `(Edge[])`: Returns an array of corner point pairs representing the edges of the hexacube.
 
 ##### Examples
 
@@ -169,16 +171,17 @@ H.edgesOf(origin);
 // ]
 ```
 
-### `H.edgesOfEvery(hexagons)`
-#### `Coord[] → Edges[]`
+### `H.edgesOfMany(hexacubes)`
+#### `Point[] → Edges[]`
 
-A function that returns the edges of every source hexagon specified.
+Takes a set of hexacube center points returns all the edges.
+
 ##### Parameters
 
-- `hexagons (Coord[])`: The array of cube coordinate of the center point of the source hexagons.
+- `hexacubes (Point[])`: The array of center points of the hexacubes.
 
 ##### Returns
-- `(Edge[])`: Returns an array of corner point pairs, or edges, of every source hexagon.
+- `(Edge[])`: Returns an array of corner point pairs, or edges, of every hexacube.
 
 ##### Examples
 
@@ -190,7 +193,7 @@ const originAndNeighbors = [
     ...H.neighborsOf(origin)
 ]
 
-H.edgesOfEvery(originAndNeighbors);
+H.edgesOfMany(originAndNeighbors);
 // => 
 // [ 
 //   [ 
@@ -221,12 +224,12 @@ H.edgesOfEvery(originAndNeighbors);
 // ]
 ```
 
-Because neighbor hexagons share edges, it may be desireable to dedupe:
+Because neighbor hexacubes share edges, it may be desireable to dedupe:
 
 ```js
 const _ = requre("lodash");
 
-const edges = H.edgesOfEvery(originAndNeighbors);
+const edges = H.edgesOfMany(originAndNeighbors);
 const dedupedEdges = _.uniqWith(edges, H.isEqualEdge)
 ```
 
@@ -237,19 +240,20 @@ const _ = requre("lodash/fp");
 
 const uniqEdge = _.uniqWith(H.isEqualEdge);
 
-const dedupedEdges = _.compose(uniqEdge, H.edgesOfEvery)(originAndNeighbors);    
+const dedupedEdges = _.compose(uniqEdge, H.edgesOfMany)(originAndNeighbors);    
 ```
 
-### `H.boundaryEdgesOfEvery(hexagons)`
-#### `Coord[] → Edges[]`
+### `H.boundsOfMany(hexacubes)`
+#### `Point[] → Edges[]`
 
-A function that returns the edges of the boundary of every source hexagon specified.
+Takes a set of hexacube center points and returns the edges of its boundary.
+
 ##### Parameters
 
-- `hexagons (Coord[])`: The array of cube coordinate of the center point of every source hexagon.
+- `hexacubes (Point[])`: The array of the center points of the hexacubes.
 
 ##### Returns
-- `(Edge[])`: Returns an array of the edges of the boundary around the cluster(s) of source hexagons.
+- `(Edge[])`: Returns an array of the edges of the boundary around the cluster(s) of hexacubes.
 
 ##### Examples
 
@@ -261,25 +265,25 @@ const originAndNeighbors = [
     ...H.neighborsOf(origin)
 ]
 
-H.boundaryEdgesOfEvery(originAndNeighbors);
+H.boundsOfMany(originAndNeighbors);
 // => 
 // [ 
 //   ... 18 edges total (3 edges on boundary for each neighbor of origin)
 // ]
 ```
 
-### `H.reducers.boundaryEdges(accumulator, edge, edgeIndex, edges)`
+### `H.accumlateBounds(accumulator, edge, edgeIndex, edges)`
 
-A function that accumlates an edge if it is a boundary edge with respect to a group of edges
+Accumlates an edge if it is a boundary edge with respect to a set of edges
 
 ```js
-const edges = H.edgesOfEvery(hexagons);
-const boundaryEdges = edges.reduce(H.reducers.boundaryEdges);
+const edges = H.edgesOfMany(hexacubes);
+const bounds = edges.reduce(H.accumlateBounds);
 ```
 
-### `H.projectionOf(coord)
+### `H.projectionOf(point)
 
-A function that projects cube coordinates isometrically to plane of view, where x-axis is the horizontal axis and y-axis and z-axis are the diagonal axis
+Projects a hexacubic point isometrically to a plane of view, where x-axis is the horizontal axis and y-axis and z-axis are the diagonal axis
 
 ```js
 H.projectionOf(origin)

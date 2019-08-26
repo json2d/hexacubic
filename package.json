@@ -1,7 +1,7 @@
 {
   "name": "hexda",
   "version": "0.1.0-alpha.2",
-  "description": "A mathy Javacript utility library for working with hexagon grids functionally",
+  "description": "A mathy Javacript utility library for working with hexacubic grids functionally",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint .",
