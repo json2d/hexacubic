@@ -127,6 +127,55 @@ hexacubeWorlds.map(H.cornersOfMany) // ✅
 hexacubeWorlds.map(H.cornersOfManyWith(options)) // ✅
 ```
 
+### Contextual Ambiguity
+
+```js
+H.toEdges(hexacube)
+```
+
+This implicit context becomes problematic when there are multiple things to can be mapped to edges:
+
+```js
+H.toEdges(centerOrCornerOrBounds)
+```
+
+Depending on the usecase, support for fuzzy typed input may or may not be possible. The alternative is to have individual functions for each thing and make the name explicitly state the thing:
+
+```
+H.cornerToEdges(point)
+H.centerToEdges(point)
+```
+
+While obviously this makes those function names more verbose, but it also makes the pluralized variants names more precise without making them more verbose by letting us to replace the `many` prefix:
+
+```
+H.centersToEdges(points)
+H.boundsToEdges(bounds)
+```
+
+Same with the declaratives:
+
+```
+H.edgesOfCenters(points)
+H.edgesOfBounds(bounds)
+```
+
+It also solves the issue with the enhanced variants: (previously mentioned)
+
+```
+H.cornersOfWith(options)(point) // "of with" is not good ❌
+H.cornersOfCenterWith(options)(point) // ✅
+```
+
+Usage with `map` also sounds more natural and no longer needs to rely on the collection name for inference from 
+
+```js
+points.map(H.toEdges) // the collection is not well-named to allow readers to infer input type
+points.map(H.centerToEdges)
+```
+
+Overall the more explicit approach to naming does improve the readability of the code by reducing contextual ambiguity.
+
 ### Misc
 
 Imperativeness also work ok for reducer functions:
