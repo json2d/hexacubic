@@ -269,20 +269,20 @@ const edges = H.centersToEdges(hexacubes);
 const bounds = edges.reduce(H.accumlateBounds);
 ```
 
-### `H.projectionOf(point)
+### `H.toProjection(point)
 
 Projects a hexacubic point isometrically to a plane of view, where x-axis is the horizontal axis and y-axis and z-axis are the diagonal axis
 
 ```js
-H.projectionOf(origin)
+H.toProjection(origin)
 // => [0, 0]
 
 H.centerToCorners(origin)
-  .map(_.compose(customTransform, H.projectionOf))
+  .map(_.compose(customTransform, H.toProjection))
   .map(([x,y]) => <Point x={x} y={y}/>)
 // =>
 
-const customProjectionOf = _.compose(customTransform, H.projectionOf)
+const customProjectionOf = _.compose(customTransform, H.toProjection)
 
 H.centerToEdges(origin)
   .map(edge => edge.map(customProjectionOf))
