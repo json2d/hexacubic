@@ -124,7 +124,7 @@ H.centerToCorners(origin);
 // ]
 ```
 
-### `H.edgesOf(hexacube)` [aliases: `H.boundsOf`]
+### `H.centerToEdges(hexacube)` [aliases: `H.boundsOf`]
 #### `Point → Edges[]`
 
 Takes a hexacube center point and returns its edges.
@@ -141,7 +141,7 @@ Takes a hexacube center point and returns its edges.
 ```js
 const origin = [0, 0, 0];
 
-H.edgesOf(origin);
+H.centerToEdges(origin);
 // => 
 // [ 
 //   [ 
@@ -171,7 +171,7 @@ H.edgesOf(origin);
 // ]
 ```
 
-### `H.edgesOfMany(hexacubes)`
+### `H.centersToEdges(hexacubes)`
 #### `[Point] → [Edge]`
 
 Takes a set of hexacube center points returns all the edges. (deduped)
@@ -193,7 +193,7 @@ const originAndNeighbors = [
     ...H.neighborsOf(origin)
 ]
 
-H.edgesOfMany(originAndNeighbors);
+H.centersToEdges(originAndNeighbors);
 // => 
 // [ 
 //   [ 
@@ -224,10 +224,10 @@ H.edgesOfMany(originAndNeighbors);
 // ]
 ```
 
-If you want all the edges with duplicates, instead `map` with `.edgesOf()`:
+If you want all the edges with duplicates, instead `map` with `.centerToEdges()`:
 
 ```js
-const edges = originAndNeighbors.map(H.edgesOf)
+const edges = originAndNeighbors.map(H.centerToEdges)
 ```
 
 
@@ -265,7 +265,7 @@ H.boundsOfMany(originAndNeighbors);
 Accumlates an edge if it is a boundary edge with respect to a set of edges
 
 ```js
-const edges = H.edgesOfMany(hexacubes);
+const edges = H.centersToEdges(hexacubes);
 const bounds = edges.reduce(H.accumlateBounds);
 ```
 
@@ -284,7 +284,7 @@ H.centerToCorners(origin)
 
 const customProjectionOf = _.compose(customTransform, H.projectionOf)
 
-H.edgesOf(origin)
+H.centerToEdges(origin)
   .map(edge => edge.map(customProjectionOf))
   .map(([[Ax,Ay],[Bx,By]]) => <Line Ax={Ax} Ay={Ay} Bx={Bx} By={By}/>)
 // =>

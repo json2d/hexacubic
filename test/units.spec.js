@@ -49,7 +49,7 @@ describe("utils", () => {
   test("encodeEdge", () => {
     const enA = utils.encodeEdge(floatyEdgeA);
     const enB = utils.encodeEdge(floatyEdgeB);
-    const enC = utils.encodeEdge(H.edgesOf(nonNeighborOfOrigin)[0]);
+    const enC = utils.encodeEdge(H.centerToEdges(nonNeighborOfOrigin)[0]);
 
     expect(enA).toEqual(enB);
     expect(enA).not.toEqual(enC);
@@ -118,9 +118,9 @@ describe("centerToCorners()", () => {
   });
 });
 
-describe("edgesOf()", () => {
+describe("centerToEdges()", () => {
   test("basic usage", () => {
-    const edgesOfOrigin = H.edgesOf(origin);
+    const edgesOfOrigin = H.centerToEdges(origin);
     const cornersOfOrigin = H.centerToCorners(origin);
 
     expect(edgesOfOrigin.length).toEqual(6);
@@ -135,24 +135,24 @@ describe("edgesOf()", () => {
     // expect(edgesOfOrigin.every(H.isEdge)).toBeTruthy();
   });
   test.skip("exceptions", () => {
-    expect(() => H.edgesOf(invalidPoint)).toThrow();
+    expect(() => H.centerToEdges(invalidPoint)).toThrow();
   });
 });
 
-describe("edgesOfMany()", () => {
+describe("centersToEdges()", () => {
   test("basic usage", () => {
-    const edgesOfOrigin = H.edgesOf(origin);
-    const edgesOfNeighbor = H.edgesOf(neighborOfOrigin);
+    const edgesOfOrigin = H.centerToEdges(origin);
+    const edgesOfNeighbor = H.centerToEdges(neighborOfOrigin);
 
-    const edgesOfGroup = H.edgesOfMany([origin, neighborOfOrigin]);
+    const edgesOfGroup = H.centersToEdges([origin, neighborOfOrigin]);
 
-    expect(edgesOfOrigin).toEqual(H.edgesOfMany([origin]));
+    expect(edgesOfOrigin).toEqual(H.centersToEdges([origin]));
 
     expect(edgesOfGroup.length).toEqual(12);
     expect(edgesOfGroup).toEqual([...edgesOfOrigin, ...edgesOfNeighbor]);
     // expect(edgesOfOrigin.every(H.isEdge)).toBeTruthy();
 
-    const edgesOfNonContiguousGroup = H.edgesOfMany([
+    const edgesOfNonContiguousGroup = H.centersToEdges([
       origin,
       neighborOfOrigin,
       nonNeighborOfOrigin
@@ -160,7 +160,7 @@ describe("edgesOfMany()", () => {
     expect(edgesOfNonContiguousGroup.length).toEqual(18);
   });
   test.skip("exceptions", () => {
-    expect(() => H.edgesOfMany([validPoint, invalidPoint])).toThrow();
+    expect(() => H.centersToEdges([validPoint, invalidPoint])).toThrow();
   });
 });
 
@@ -189,6 +189,6 @@ describe("boundsOfMany()", () => {
     expect(boundsOfOriginAndNeighbors.length).toEqual(18);
   });
   test.skip("exceptions", () => {
-    expect(() => H.edgesOfMany([validPoint, invalidPoint])).toThrow();
+    expect(() => H.centersToEdges([validPoint, invalidPoint])).toThrow();
   });
 });
