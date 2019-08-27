@@ -271,7 +271,7 @@ const edges = H.centersToEdges(hexacubes);
 const bounds = edges.reduce(H.accumlateBounds);
 ```
 
-### `H.toProjection(point)
+### `H.toProjection(point)`
 
 Projects a hexacubic point isometrically to a plane of view, where x-axis is the horizontal axis and y-axis and z-axis are the diagonal axis
 
