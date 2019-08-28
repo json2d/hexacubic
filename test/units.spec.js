@@ -5,7 +5,6 @@ const utils = require("./../lib/utils");
 
 const origin = [0, 0, 0];
 const neighborOfOrigin = [0, 1, -1];
-const midpointOfOriginAndNeighbor = [0, .5, -.5];
 const nonNeighborOfOrigin = [0, 5, -5];
 const invalidPoint = [1, 1, 1];
 const validPoint = [0, 0, 0];
@@ -71,16 +70,19 @@ describe("comparators", () => {
 
 describe("toMidpoint()", () => {
   test("basic usage", () => {
-
-    const neighborsOfNeighbor = H.centerToNeighbors(neighborOfOrigin)
+    const midpointOfOriginAndNeighbor = [0, .5, -.5];
     expect(H.toMidpoint([origin,neighborOfOrigin])).toEqual(midpointOfOriginAndNeighbor);
-    expect(H.toMidpoint(constants.NEIGHBOR_OFFSETS)).toEqual([0,0,0]);
+
+  })
+  test("with many points", () => {
     
+    const neighborsOfNeighbor = H.centerToNeighbors(neighborOfOrigin)
+    expect(H.toMidpoint(constants.NEIGHBOR_OFFSETS)).toEqual([0,0,0]);
     expect(H.toMidpoint(neighborsOfNeighbor)).toEqual(neighborOfOrigin);
 
   })
   test("with floats", () => {
-    
+
     const cornersOfNeighbor = H.centerToCorners(neighborOfOrigin)
     expect(comparators.points(neighborOfOrigin, H.toMidpoint(cornersOfNeighbor))).toBeTruthy();
   });
