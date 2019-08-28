@@ -272,6 +272,7 @@ const bounds = edges.reduce(H.accumlateBounds);
 ```
 
 ### `H.toProjection(point)`
+#### `Point → XY`
 
 Projects a hexacubic point isometrically to a plane of view, where x-axis is the horizontal axis and y-axis and z-axis are the diagonal axis
 
@@ -290,5 +291,25 @@ H.centerToEdges(origin)
   .map(edge => edge.map(customProjectionOf))
   .map(([[Ax,Ay],[Bx,By]]) => <Line Ax={Ax} Ay={Ay} Bx={Bx} By={By}/>)
 // =>
+```
+
+
+### `H.toMidpoint(points)`
+#### `[Point] → Point`
+
+Takes an array of hexacubic points and returns the midpoint, or median point.
+
+```js
+
+const origin = [0, 0, 0];
+const neighborOfOrigin = [0, 1, -1];
+
+H.toMidpoint([origin, neighborOfOrigin])
+// => [0, .5, -.5]
+
+const neighborsOfOrigin = H.centerToNeighbors(origin);
+H.toMidpoint(neighborsOfNeighbor);
+// => [0, 0, 0]
+
 ```
 
