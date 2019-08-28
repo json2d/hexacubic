@@ -293,6 +293,12 @@ H.centerToEdges(origin)
 // =>
 ```
 
+### `H.toProjectionWith(options)(point)`
+#### `Point → * → XY`
+
+options:
+- `size (Number)` - The projection scalar.
+- `offset ([Number])` - The projection translated.
 
 ### `H.toMidpoint(points)`
 #### `[Point] → Point`

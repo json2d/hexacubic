@@ -70,21 +70,21 @@ describe("comparators", () => {
 
 describe("toMidpoint()", () => {
   test("basic usage", () => {
-    const midpointOfOriginAndNeighbor = [0, .5, -.5];
-    expect(H.toMidpoint([origin,neighborOfOrigin])).toEqual(midpointOfOriginAndNeighbor);
-
-  })
+    const midpointOfOriginAndNeighbor = [0, 0.5, -0.5];
+    expect(H.toMidpoint([origin, neighborOfOrigin])).toEqual(
+      midpointOfOriginAndNeighbor
+    );
+  });
   test("with many points", () => {
-    
-    const neighborsOfNeighbor = H.centerToNeighbors(neighborOfOrigin)
-    expect(H.toMidpoint(constants.NEIGHBOR_OFFSETS)).toEqual([0,0,0]);
+    const neighborsOfNeighbor = H.centerToNeighbors(neighborOfOrigin);
+    expect(H.toMidpoint(constants.NEIGHBOR_OFFSETS)).toEqual([0, 0, 0]);
     expect(H.toMidpoint(neighborsOfNeighbor)).toEqual(neighborOfOrigin);
-
-  })
+  });
   test("with floats", () => {
-
-    const cornersOfNeighbor = H.centerToCorners(neighborOfOrigin)
-    expect(comparators.points(neighborOfOrigin, H.toMidpoint(cornersOfNeighbor))).toBeTruthy();
+    const cornersOfNeighbor = H.centerToCorners(neighborOfOrigin);
+    expect(
+      comparators.points(neighborOfOrigin, H.toMidpoint(cornersOfNeighbor))
+    ).toBeTruthy();
   });
 });
 
