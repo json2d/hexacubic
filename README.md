@@ -319,3 +319,24 @@ H.toMidpoint(neighborsOfNeighbor);
 
 ```
 
+### `H.distanceFrom(hexacubeA)(hexacubeB)`
+#### `Point → Point → Number`
+
+Creates a function that calculates the distance of `hexacubeB` from `hexacubeA`.
+
+```js
+
+const origin = [0, 0, 0];
+const neighborOfOrigin = [0, 1, -1];
+
+H.distanceFrom(origin)(neighborOfOrigin)
+// => 1
+
+const distanceFromOrigin = H.distanceFrom(origin)
+const elsewhere = [5, -5, 0]
+distanceFromOrigin(elsewhere)
+// => 5
+
+```
+
+
