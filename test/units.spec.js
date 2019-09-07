@@ -211,3 +211,23 @@ describe("centersToBounds()", () => {
     expect(() => H.centersToEdges([validPoint, invalidPoint])).toThrow();
   });
 });
+
+describe("distanceFrom()", () => {
+  test("basic usage", () => {
+    expect(H.distanceFrom(origin)(neighborOfOrigin)).toEqual(1);
+
+    const distanceFromOrigin = H.distanceFrom(origin);
+
+    expect(distanceFromOrigin(origin)).toEqual(0);
+
+    const elsewhere = [5, -5, 0];
+    const somewhere = [4, -5, 1];
+
+    expect(distanceFromOrigin(elsewhere)).toEqual(5);
+    expect(distanceFromOrigin(somewhere)).toEqual(5);
+    expect(H.distanceFrom(elsewhere)(somewhere)).toEqual(1);
+  });
+  test.skip("exceptions", () => {
+    expect(() => H.distanceFrom(validPoint, invalidPoint)).toThrow();
+  });
+});
