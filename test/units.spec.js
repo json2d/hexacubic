@@ -231,3 +231,30 @@ describe("distanceFrom()", () => {
     expect(() => H.distanceFrom(validPoint, invalidPoint)).toThrow();
   });
 });
+
+describe("polygonsOfOrigin()", () => {
+  test("basic usage", () => {
+    const polygonsOfOrigin = H.centersToPolygons([origin]);
+
+    expect(polygonsOfOrigin.length).toEqual(1);
+
+    // next assert may not be so good since order may not be the same
+    expect(polygonsOfOrigin[0]).toEqual(H.constants.CORNER_OFFSETS); 
+    
+    const polygonsOfOriginAndNeighbor = H.centersToPolygons([origin, neighborOfOrigin]);
+
+    expect(polygonsOfOriginAndNeighbor.length).toEqual(1);
+    expect(polygonsOfOriginAndNeighbor[0].length).toEqual(10);
+
+    const polygonsOfOriginAndNonNeighbor = H.centersToPolygons([origin, nonNeighborOfOrigin]);
+
+    expect(polygonsOfOriginAndNonNeighbor.length).toEqual(2);
+    expect(polygonsOfOriginAndNonNeighbor[0].length).toEqual(6);
+    expect(polygonsOfOriginAndNonNeighbor[1].length).toEqual(6);
+
+  });
+  test.skip("exceptions", () => {
+    expect(() => H.polygonsOfOrigin([validPoint, invalidPoint])).toThrow();
+    expect(() => H.polygonsOfOrigin(validPoint)).toThrow();
+  });
+});

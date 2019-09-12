@@ -340,3 +340,39 @@ distanceFromOrigin(elsewhere)
 ```
 
 
+
+### `H.centersToPolygons(hexacubes)`
+#### `[Point] → [Polygon]`
+
+Takes a set of hexacube center points and returns a set of one or more polygons (one for each bound cluster).
+
+##### Parameters
+
+- `hexacubes ([Point])`: The array of the center points of the hexacubes.
+
+##### Returns
+- `([Polygon])`: Returns an array of the polygon(s) of the bound cluster(s) of hexacubes.
+
+##### Examples
+
+```js
+const origin = [0, 0, 0];
+
+H.centersToPolygons([origin]);
+// => 
+// [ 
+//   ... 1 polygon with 6 points
+// ]
+
+
+const originAndNeighbors = [
+    origin,
+    ...H.centerToNeighbors(origin)
+]
+
+H.centersToPolygons(originAndNeighbors);
+// => 
+// [ 
+//   ... 1 polygon with 18 points
+// ]
+```
