@@ -54,6 +54,10 @@ describe("utils", () => {
     expect(enA).toEqual(enB);
     expect(enA).not.toEqual(enC);
   });
+  test("isCubic", () => {
+    expect(utils.isCubic(validPoint)).toBeTruthy();
+    expect(utils.isCubic(invalidPoint)).not.toBeTruthy();
+  });
 });
 
 describe("comparators", () => {
