@@ -13,10 +13,14 @@ const floatyA = 0.33333333333333337;
 const floatyB = 0.3333333333333333;
 
 const floatyPointA = [
-  0.33333333333333337, 0.3333333333333333, -0.6666666666666667
+  0.33333333333333337,
+  0.3333333333333333,
+  -0.6666666666666667
 ];
 const floatyPointB = [
-  0.3333333333333333, 0.33333333333333337, -0.6666666666666666
+  0.3333333333333333,
+  0.33333333333333337,
+  -0.6666666666666666
 ];
 
 const floatyEdgeA = [
@@ -229,7 +233,7 @@ describe("distanceFrom()", () => {
 });
 
 describe("polygonsOfOrigin()", () => {
-  test("basic usage", () => {
+  test.skip("basic usage", () => {
     const polygonsOfOrigin = H.centersToPolygons([origin]);
 
     expect(polygonsOfOrigin.length).toEqual(1);
@@ -257,5 +261,41 @@ describe("polygonsOfOrigin()", () => {
   test.skip("exceptions", () => {
     expect(() => H.polygonsOfOrigin([validPoint, invalidPoint])).toThrow();
     expect(() => H.polygonsOfOrigin(validPoint)).toThrow();
+  });
+});
+
+// TODO: refactor w/ hexacube -> xy lookup so test can be put in loop
+// eg. Map({ [0,0,0]: [0,0]})
+describe("toProjection()", () => {
+  test("basic usage - origin", () => {
+    const xy = H.toProjection(origin);
+    expect(xy).toEqual([0, 0]);
+  });
+  test("basic usage - unit points", () => {
+    const xy = H.toProjection([1, -2, 1]);
+    expect(xy).toEqual([0, -3]);
+
+    const xy2 = H.toProjection([-1, 2, -1]);
+    expect(xy2).toEqual([0, 3]);
+
+    const xy3 = H.toProjection([-3, 2, 1]);
+    expect(xy3).toEqual([-3.464101615137755, 3]);
+  });
+  test("basic usage - non-unit points", () => {
+    expect(H.toProjection([0.5, -1, , 0.5])).toEqual([0, -1.5]);
+  });
+});
+
+describe("toUnprojection()", () => {
+  test("basic usage", () => {
+    expect(H.toUnprojection([0, 0])).toEqual(origin);
+  });
+  test("basic usage - unit points", () => {
+    expect(H.toUnprojection([0, -3])).toEqual([1, -2, 1]);
+    expect(H.toUnprojection([0, 3])).toEqual([-1, 2, -1]);
+    expect(H.toUnprojection([-3.464101615137755, 3])).toEqual([-3, 2, 1]);
+  });
+  test("basic usage - non-unit points", () => {
+    expect(H.toUnprojection([0, -1.5])).toEqual([0.5, -1, 0.5]);
   });
 });
