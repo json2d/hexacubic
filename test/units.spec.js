@@ -13,14 +13,10 @@ const floatyA = 0.33333333333333337;
 const floatyB = 0.3333333333333333;
 
 const floatyPointA = [
-  0.33333333333333337,
-  0.3333333333333333,
-  -0.6666666666666667
+  0.33333333333333337, 0.3333333333333333, -0.6666666666666667
 ];
 const floatyPointB = [
-  0.3333333333333333,
-  0.33333333333333337,
-  -0.6666666666666666
+  0.3333333333333333, 0.33333333333333337, -0.6666666666666666
 ];
 
 const floatyEdgeA = [
@@ -239,19 +235,24 @@ describe("polygonsOfOrigin()", () => {
     expect(polygonsOfOrigin.length).toEqual(1);
 
     // next assert may not be so good since order may not be the same
-    expect(polygonsOfOrigin[0]).toEqual(H.constants.CORNER_OFFSETS); 
-    
-    const polygonsOfOriginAndNeighbor = H.centersToPolygons([origin, neighborOfOrigin]);
+    expect(polygonsOfOrigin[0]).toEqual(H.constants.CORNER_OFFSETS);
+
+    const polygonsOfOriginAndNeighbor = H.centersToPolygons([
+      origin,
+      neighborOfOrigin
+    ]);
 
     expect(polygonsOfOriginAndNeighbor.length).toEqual(1);
     expect(polygonsOfOriginAndNeighbor[0].length).toEqual(10);
 
-    const polygonsOfOriginAndNonNeighbor = H.centersToPolygons([origin, nonNeighborOfOrigin]);
+    const polygonsOfOriginAndNonNeighbor = H.centersToPolygons([
+      origin,
+      nonNeighborOfOrigin
+    ]);
 
     expect(polygonsOfOriginAndNonNeighbor.length).toEqual(2);
     expect(polygonsOfOriginAndNonNeighbor[0].length).toEqual(6);
     expect(polygonsOfOriginAndNonNeighbor[1].length).toEqual(6);
-
   });
   test.skip("exceptions", () => {
     expect(() => H.polygonsOfOrigin([validPoint, invalidPoint])).toThrow();
