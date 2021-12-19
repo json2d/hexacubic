@@ -288,7 +288,9 @@ describe("toProjection()", () => {
 
 describe("toUnprojection()", () => {
   test("basic usage", () => {
-    expect(H.toUnprojection([0, 0])).toEqual(origin);
+    // need to use hexacube comparator here because `-0 !== 0`
+    // in fact these test should probably all be written this way
+    expect(H.comparators.points(H.toUnprojection([0, 0]), origin)).toBeTruthy();
   });
   test("basic usage - unit points", () => {
     expect(H.toUnprojection([0, -3])).toEqual([1, -2, 1]);
