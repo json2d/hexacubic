@@ -286,6 +286,21 @@ describe("toProjection()", () => {
   });
 });
 
+describe("toProjectionWith()", () => {
+  test("basic usage", () => {
+    const project = H.toProjectionWith({ size: 2, offset: -10 });
+
+    // expected values
+    const xyByCube = new Map([
+      [[0, 0, 0], [-10, -10]],
+      [[1, -2, 1], [-10, -16]],
+      [[-1, 2, -1], [-10, -4]]
+    ]);
+
+    xyByCube.forEach((xy, cube) => expect(project(cube)).toEqual(xy));
+  });
+});
+
 describe("toUnprojection()", () => {
   test("basic usage", () => {
     // need to use hexacube comparator here because `-0 !== 0`
@@ -299,5 +314,28 @@ describe("toUnprojection()", () => {
   });
   test("basic usage - non-unit points", () => {
     expect(H.toUnprojection([0, -1.5])).toEqual([0.5, -1, 0.5]);
+  });
+});
+
+describe("toUnprojectionWith()", () => {
+  test("basic usage", () => {
+    // c&p'd from `toProjectionWith` spec
+
+    const unproject = H.toUnprojectionWith({ size: 2, offset: -10 });
+
+    // expected values
+    const xyByCube = new Map([
+      [[0, 0, 0], [-10, -10]],
+      [[1, -2, 1], [-10, -16]],
+      [[-1, 2, -1], [-10, -4]]
+    ]);
+
+    xyByCube.forEach((xy, cube) => {
+      // // this fails by false positive case by `-0 !== 0
+      // expect(unproject(xy)).toEqual(cube));
+
+      // so instead we'll use our hexacube comparator as a workaround
+      expect(H.comparators.points(unproject(xy), cube)).toBeTruthy();
+    });
   });
 });
