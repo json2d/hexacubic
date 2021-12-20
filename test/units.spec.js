@@ -38,6 +38,17 @@ describe("utils", () => {
     expect(utils.roundFloat(floatyA)).not.toEqual(floatyA);
   });
 
+  test("roundCubic", () => {
+    // mostly within
+    expect(utils.roundCubic([-1.30534, 0.03333, 1.272])).toEqual([-1, 0, 1]);
+
+    // corner
+    expect(utils.roundCubic(floatyPointA)).toEqual([1, 0, -1]);
+
+    // edge
+    expect(utils.roundCubic([-2.06347, 1.5, 0.56347])).toEqual([-2, 1, 1]);
+  });
+
   test("encodePoint", () => {
     const enA = utils.encodePoint(floatyPointA);
     const enB = utils.encodePoint(floatyPointB);
