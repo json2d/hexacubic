@@ -1,6 +1,6 @@
 {
   "name": "hexacubic",
-  "version": "0.1.0-alpha.15",
+  "version": "0.1.0-alpha.16",
   "description": "A mathy Javacript utility library for working with hexacubic grids functionally",
   "main": "lib/index.js",
   "scripts": {
